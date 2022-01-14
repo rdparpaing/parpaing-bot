@@ -44,7 +44,7 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.content.startsWith("+") && !message.content.startsWith("+ ")) add(message, supabase)
+  if (message.content.startsWith("+") && !message.content.startsWith("+ ")) add(message, supabase, uploadChannel)
   else if (message.content.startsWith("->") && !message.content.startsWith("-> ")) get(message, supabase)
   else if (message.content.startsWith("-") && !message.content.startsWith("- ")) remove(message, supabase)
   else if (message.content.startsWith(".") && !message.content.startsWith(". ")) random(message, supabase)

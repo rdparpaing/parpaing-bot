@@ -1,6 +1,7 @@
 const axios = require("axios").default;
+const Discord = require("discord.js")
 
-module.exports = async (message, supabase) => {
+module.exports = async (message, supabase, uploadChannel) => {
     const tag = message.content.slice(1).split(" ")[0];
     const comment = message.content.split(" ").slice(1).join(" ");
     if (
