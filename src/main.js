@@ -7,6 +7,16 @@ const client = new Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
 
+const app = require("express")();
+
+app.get("/", (req, res) => {
+  res.status(200).json({status: "ok"})
+})
+
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Serveur à l'écoute")
+})
+
 const options = {
   schema: "public",
   autoRefreshToken: true,
