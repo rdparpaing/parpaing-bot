@@ -21,11 +21,9 @@ module.exports = async (message, supabase) => {
         str = "Les tags du groupe *" + groupName + "* sont: ";
         for (i in res1.data[0].tags) {
           str += `**${res1.data[0].tags[i]}** (${
-            tagcount[res1.data[0].tags[i]]
+            tagcount[res1.data[0].tags[i]] || 0
           })`;
-          if (i + 1 < res1.data[0].tags.length) {
-            str += ", ";
-          }
+          str += ", ";
         }
         message.channel.send(str);
       } else {
