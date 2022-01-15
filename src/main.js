@@ -2,7 +2,6 @@ require("dotenv").config();
 const { createClient } = require("@supabase/supabase-js");
 
 const { Client } = require("discord.js");
-const Discord = require("discord.js");
 const client = new Client({
   intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
 });
@@ -10,12 +9,12 @@ const client = new Client({
 const app = require("express")();
 
 app.get("/", (req, res) => {
-  res.status(200).json({status: "ok"})
-})
+  res.status(200).json({ status: "ok" });
+});
 
-app.listen(process.env.PORT || 8080, () => {
-  console.log("Serveur à l'écoute")
-})
+app.listen(process.env.PORT || 8080, () => {
+  console.log("Serveur à l'écoute");
+});
 
 const options = {
   schema: "public",
@@ -30,12 +29,16 @@ const supabase = createClient(
   options
 );
 
-const add = require("./commands/add")
-const remove = require("./commands/remove")
-const random = require("./commands/random")
-const list = require("./commands/list")
+const add = require("./commands/add");
+const remove = require("./commands/delete");
+const random = require("./commands/random");
+const list = require("./commands/list");
 const get = require("./commands/get");
 const help = require("./commands/help");
+const createGroup = require("./commands/createGroup");
+const randomFromGroup = require("./commands/randomFromGroup");
+const deleteGroup = require("./commands/deleteGroup");
+const glist = require("./commands/glist");
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -43,28 +46,66 @@ client.on("ready", async () => {
   uploadChannel = await client.channels.fetch("931558530522177566");
   if (process.argv.indexOf("maintenance")) {
     client.user.setPresence({
-      status: "dnd"
-    })
+      status: "dnd",
+    });
     client.user.setActivity({
-      name: "MAINTENANCE - g!help"
-    })
+      name: "MAINTENANCE - g!help",
+    });
   } else {
     client.user.setPresence({
-      status: "online"
-    })
+      status: "online",
+    });
     client.user.setActivity({
-      name: "g!help"
-    })
+      name: "g!help",
+    });
   }
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.content.startsWith("+") && !message.content.startsWith("+ ")) add(message, supabase, uploadChannel)
-  else if (message.content.startsWith("->") && !message.content.startsWith("-> ")) get(message, supabase)
-  else if (message.content.startsWith("delete-") && !message.content.startsWith("delete- ")) remove(message, supabase)
-  else if (message.content.startsWith(".") && !message.content.startsWith(". ")) random(message, supabase)
-  else if (message.content.startsWith("l.") && !message.content.startsWith("l. ")) list(message, supabase)
-  else if (message.content.startsWith("g!help")) help(message, message.member.displayColor)
+  if (
+    message.content.startsWith("delete--") &&
+    !message.content.startsWith("delete-- ")
+  )
+    deleteGroup(message, supabase);
+  else if (
+    message.content.startsWith("delete-") &&
+    !message.content.startsWith("delete- ")
+  )
+    remove(message, supabase);
+  else if (
+    message.content.startsWith("...") &&
+    !message.content.startsWith("... ")
+  )
+    get(message, supabase);
+  else if (
+    message.content.startsWith("..") &&
+    !message.content.startsWith(".. ")
+  ) {
+    randomFromGroup(message, supabase);
+  } else if (
+    message.content.startsWith(".") &&
+    !message.content.startsWith(". ")
+  )
+    random(message, supabase);
+  else if (
+    message.content.startsWith("l.") &&
+    !message.content.startsWith("l. ")
+  )
+    list(message, supabase);
+  else if (
+    message.content.startsWith("++") &&
+    !message.content.startsWith("++ ")
+  )
+    createGroup(message, supabase);
+  else if (message.content.startsWith("+") && !message.content.startsWith("+ "))
+    add(message, supabase, uploadChannel);
+  else if (message.content.startsWith("g!help"))
+    help(
+      message,
+      message.member.displayColor,
+      message.content.split(" ").slice(1)
+    );
+  else if (message.content.startsWith("g!list")) glist(message, supabase);
 });
 
 client.login(process.env.TOKEN);
