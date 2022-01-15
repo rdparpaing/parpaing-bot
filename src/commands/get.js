@@ -8,11 +8,11 @@ module.exports = async (message, supabase) => {
       const tag = res.data[0];
       if (tag.attachment) {
         message.channel.send({
-          content: tag.comment ? `> ${tag.comment}\n` + `_Tag n°**${tag.id}**_` : "** **",
+          content: tag.comment ? `> ${tag.comment}\n` + `Tag n°**${tag.id}**` : `Tag n°**${tag.id}**`,
           files: [tag.attachment],
         });
       } else {
-        message.channel.send(tag.comment ? `> ${tag.comment}\n` + `_Tag n°**${tag.id}**_` : "** **");
+        message.channel.send(tag.comment ? `> ${tag.comment}\n` + `Tag n°**${tag.id}**` : `Tag n°**${tag.id}**`);
       }
     } else {
       message.reply(":x: Ce tag n'existe pas !");
