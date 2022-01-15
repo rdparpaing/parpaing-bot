@@ -30,10 +30,14 @@ module.exports = async (message, supabase, uploadChannel) => {
         attachment: m.attachments.first().attachment,
       });
     } else {
-      res = await supabase.from("archive").insert({
-        tag,
-        comment,
-      });
+      if (!comment.replace(/\s/gi, "")) {
+        message.reply(":x: Mettez un commentaire ou une pièce-jointe pour poster !")
+      } else {
+        res = await supabase.from("archive").insert({
+          tag,
+          comment,
+        });
+      }
     }
     if (res.statusText != "Created") {
       message.channel.send(":x: Une erreur s'est produite.");
