@@ -41,12 +41,27 @@ var uploadChannel;
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   uploadChannel = await client.channels.fetch("931558530522177566");
+  if (process.argv.indexOf("maintenance")) {
+    client.user.setPresence({
+      status: "dnd"
+    })
+    client.user.setActivity({
+      name: "MAINTENANCE - g!help"
+    })
+  } else {
+    client.user.setPresence({
+      status: "online"
+    })
+    client.user.setActivity({
+      name: "g!help"
+    })
+  }
 });
 
 client.on("messageCreate", async (message) => {
   if (message.content.startsWith("+") && !message.content.startsWith("+ ")) add(message, supabase)
   else if (message.content.startsWith("->") && !message.content.startsWith("-> ")) get(message, supabase)
-  else if (message.content.startsWith("-") && !message.content.startsWith("- ")) remove(message, supabase)
+  else if (message.content.startsWith("delete-") && !message.content.startsWith("delete- ")) remove(message, supabase)
   else if (message.content.startsWith(".") && !message.content.startsWith(". ")) random(message, supabase)
   else if (message.content.startsWith("l.") && !message.content.startsWith("l. ")) list(message, supabase)
   else if (message.content.startsWith("g!help")) help(message, message.member.displayColor)

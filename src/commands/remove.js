@@ -1,5 +1,5 @@
 module.exports = async (message, supabase) => {
-  const id = message.content.slice(1);
+  const id = message.content.slice(7);
     const res = await supabase.from("archive").delete().eq("id", parseInt(id) || 0);
     console.log(res);
     if (res.statusText != "OK") {
