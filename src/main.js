@@ -44,7 +44,7 @@ var uploadChannel;
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   uploadChannel = await client.channels.fetch("931558530522177566");
-  if (process.argv.indexOf("maintenance")) {
+  if (process.argv.indexOf("maintenance") + 1) {
     client.user.setPresence({
       status: "dnd",
     });
@@ -57,6 +57,7 @@ client.on("ready", async () => {
     });
     client.user.setActivity({
       name: "g!help",
+      type: "LISTENING"
     });
   }
 });
