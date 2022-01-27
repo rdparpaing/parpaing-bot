@@ -108,7 +108,9 @@ client.on("messageCreate", async (message) => {
       message.content.split(" ").slice(1)
     )}
   else if (message.content.startsWith("g!list")) glist(message, supabase);
-
+  else if (/^(l|delete)?[+.-]+[\w\d]+/.test(message.content)) {
+    message.reply(":x: Les anciens préfixs ne fonctionnent plus, regardez `g!help` pour plus d'infos")
+  }
 });
 
 client.login(process.env.TOKEN);
