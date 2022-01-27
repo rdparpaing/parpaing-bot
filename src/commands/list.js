@@ -1,5 +1,5 @@
 module.exports = async (message, supabase) => {
-  const tag = message.content.slice(2).split(" ")[0];
+  const tag = message.content.slice(3).split(" ")[0];
   const res = await supabase.from("archive").select("id").eq("tag", tag);
   if (res.data.length > 1) {
     const list = res.data.map((i) => i.id);
@@ -13,6 +13,6 @@ module.exports = async (message, supabase) => {
       `Le tag "**${tag}**" contient uniquement l'id **${res.data[0].id}**`
     );
   } else {
-    message.reply(":x: Ce tag n'existe pas !");
+    message.reply(":x: Ce tag n'existe pas !")
   }
 };

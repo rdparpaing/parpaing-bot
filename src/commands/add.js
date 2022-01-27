@@ -2,7 +2,10 @@ const axios = require("axios").default;
 const Discord = require("discord.js");
 
 module.exports = async (message, supabase, uploadChannel) => {
-  const tag = message.content.slice(1).split(" ")[0];
+  const tag = message.content.slice(2).split(" ")[0];
+  if (tag == "*") {
+    message.react(":x:")
+  };
   const comment = message.content.split(" ").slice(1).join(" ");
   if (
     message.mentions.everyone ||
@@ -31,7 +34,7 @@ module.exports = async (message, supabase, uploadChannel) => {
     });
   } else {
     if (message.content.replace(/[\s\n\*\_\`]+/gi, "") == "+" + tag) {
-      message.reply(
+      message.channel.send(
         ":x: Mettez un commentaire ou une pièce-jointe pour poster !"
       );
       return;
@@ -43,8 +46,8 @@ module.exports = async (message, supabase, uploadChannel) => {
     }
   }
   if (res.statusText != "Created") {
-    message.channel.send(":x: Une erreur s'est produite.");
+    message.channel.send(":x: Une erreur est survenue.")
   } else {
-    message.channel.send("✅ Votre tag a été créé !");
+    message.channel.send("✅ Votre post a été créé avec l'ID **" + res.data[0].id +  "** !");
   }
 };

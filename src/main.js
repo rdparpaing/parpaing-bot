@@ -62,50 +62,52 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
+
   if (
-    message.content.startsWith("delete--") &&
-    !message.content.startsWith("delete-- ")
+    message.content.startsWith("g--") &&
+    !message.content.startsWith("g-- ")
   )
-    deleteGroup(message, supabase);
+    {deleteGroup(message, supabase)}
   else if (
-    message.content.startsWith("delete-") &&
-    !message.content.startsWith("delete- ")
+    message.content.startsWith("g-") &&
+    !message.content.startsWith("g- ")
   )
-    remove(message, supabase);
+    {remove(message, supabase)}
   else if (
-    message.content.startsWith("...") &&
-    !message.content.startsWith("... ")
+    message.content.startsWith("g>") &&
+    !message.content.startsWith("g> ")
   )
-    get(message, supabase);
+    {get(message, supabase)}
   else if (
-    message.content.startsWith("..") &&
-    !message.content.startsWith(".. ")
+    message.content.startsWith("g..") &&
+    !message.content.startsWith("g.. ")
   ) {
-    randomFromGroup(message, supabase);
+    {randomFromGroup(message, supabase)}
   } else if (
-    message.content.startsWith(".") &&
-    !message.content.startsWith(". ")
+    message.content.startsWith("g.") &&
+    !message.content.startsWith("g. ")
   )
-    random(message, supabase);
+    {random(message, supabase)}
   else if (
-    message.content.startsWith("l.") &&
-    !message.content.startsWith("l. ")
+    message.content.startsWith("gl.") &&
+    !message.content.startsWith("gl. ")
   )
-    list(message, supabase);
+    {list(message, supabase)}
   else if (
-    message.content.startsWith("++") &&
-    !message.content.startsWith("++ ")
+    message.content.startsWith("g++") &&
+    !message.content.startsWith("g++ ")
   )
-    createGroup(message, supabase);
-  else if (message.content.startsWith("+") && !message.content.startsWith("+ "))
-    add(message, supabase, uploadChannel);
+    {createGroup(message, supabase)}
+  else if (message.content.startsWith("g+") && !message.content.startsWith("g+ "))
+    {add(message, supabase, uploadChannel)}
   else if (message.content.startsWith("g!help"))
-    help(
+    {help(
       message,
       message.member.displayColor,
       message.content.split(" ").slice(1)
-    );
+    )}
   else if (message.content.startsWith("g!list")) glist(message, supabase);
+
 });
 
 client.login(process.env.TOKEN);

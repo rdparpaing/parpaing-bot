@@ -16,19 +16,19 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Supprimer un élément",
-          value: "``delete-<id>``",
+          value: "``g-<id>``",
         },
         {
           name: "Lire un élément aléatoire d'un tag",
-          value: "``.<tag>``",
+          value: "``g.<tag>``",
         },
         {
           name: "Lire un élément avec son id",
-          value: "``...<id>``",
+          value: "``g><id>``",
         },
         {
           name: "Lister les ids d'un tag",
-          value: "``l.<tag>``",
+          value: "``gl.<tag>``",
         },
       ])
       .setTimestamp(Date.now())
@@ -42,16 +42,16 @@ module.exports = (message, color, argv) => {
         {
           name: "Créer un groupe/Modifier un groupe",
           value:
-            "``++<nom> <tag1> <tag2>``\n" +
+            "``g++<nom> <tag1> <tag2>``\n" +
             ". Recréer un groupe sous le même nom va remplacer le groupe.",
         },
         {
           name: "Supprimer un groupe",
-          value: "``delete--<id>``",
+          value: "``g--<id>``",
         },
         {
           name: "Lire un élément aléatoire d'un groupe",
-          value: "``..<tag>``",
+          value: "``g..<tag>``",
         },
       ])
       .setTimestamp(Date.now())

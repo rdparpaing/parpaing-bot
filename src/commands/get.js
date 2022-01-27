@@ -1,5 +1,5 @@
 module.exports = async (message, supabase) => {
-  const id = message.content.slice(3).split(" ")[0];
+  const id = message.content.slice(2).split(" ")[0];
   const res = await supabase
     .from("archive")
     .select("id,comment,attachment")
@@ -21,6 +21,6 @@ module.exports = async (message, supabase) => {
       );
     }
   } else {
-    message.reply(":x: Ce post n'existe pas !");
+    message.reply(":x: Ce post n'existe pas !")
   }
 };

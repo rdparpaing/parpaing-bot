@@ -1,5 +1,5 @@
 module.exports = async (message, supabase) => {
-  const groupName = message.content.slice(2);
+  const groupName = message.content.slice(3);
   const res1 = await supabase
     .from("groups")
     .select("tags")
@@ -26,9 +26,9 @@ module.exports = async (message, supabase) => {
         );
       }
     } else {
-      message.reply(":x: Ce tag n'existe pas !");
+      message.reply(":x: Ce tag n'existe pas !")
     }
   } else {
-    message.reply(":x: Ce groupe n'existe pas !");
+    message.reply(":x: Ce groupe n'existe pas !")
   }
 };
