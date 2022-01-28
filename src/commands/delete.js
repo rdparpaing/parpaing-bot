@@ -5,7 +5,7 @@ module.exports = async (message, supabase) => {
     .delete()
     .eq("id", parseInt(id) || 0);
   if (res.statusText != "OK") {
-    message.channel.send(":x: Une erreur est survenue.")
+    message.channel.send(":x: Une erreur est survenue.");
   } else {
     message.react("✅");
   }

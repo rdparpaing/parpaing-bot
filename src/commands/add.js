@@ -4,8 +4,8 @@ const Discord = require("discord.js");
 module.exports = async (message, supabase, uploadChannel) => {
   const tag = message.content.slice(2).split(" ")[0];
   if (tag == "*") {
-    message.react(":x:")
-  };
+    message.react(":x:");
+  }
   const comment = message.content.split(" ").slice(1).join(" ");
   if (
     message.mentions.everyone ||
@@ -46,8 +46,10 @@ module.exports = async (message, supabase, uploadChannel) => {
     }
   }
   if (res.statusText != "Created") {
-    message.channel.send(":x: Une erreur est survenue.")
+    message.channel.send(":x: Une erreur est survenue.");
   } else {
-    message.channel.send("✅ Votre post a été créé avec l'ID **" + res.data[0].id +  "** !");
+    message.channel.send(
+      "✅ Votre post a été créé avec l'ID **" + res.data[0].id + "** !"
+    );
   }
 };

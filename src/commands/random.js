@@ -1,42 +1,61 @@
 module.exports = async (message, supabase) => {
   const _tag = message.content.slice(2).split(" ")[0];
   if (_tag == "*") {
-    const res = await supabase
-    .from("archive")
-    .select("id")
+    const res = await supabase.from("archive").select("id");
     if (res.data.length > 0) {
-      const id = res.data[Math.floor(Math.random() * res.data.length)]
+      const id = res.data[Math.floor(Math.random() * res.data.length)];
       const res2 = await supabase
-      .from("archive")
-      .select("id,comment,attachment")
-      .eq("id", id);
+        .from("archive")
+        .select("id,comment,attachment")
+        .eq("id", id);
       if (res2.data.length > 0) {
-
       } else {
-        message.reply("x: Une erreur est survenue.")
+        message.reply("x: Une erreur est survenue.");
       }
     } else {
-      message.reply("x: Une erreur est survenue.")
+      message.reply("x: Une erreur est survenue.");
     }
   }
   const res = await supabase
     .from("archive")
-    .select("id,comment,attachment")
+    .select("id,comment,attachment,rating")
     .eq("tag", _tag);
   if (res.data.length > 0) {
     const tag = res.data[Math.floor(Math.random() * res.data.length)];
     if (tag.attachment) {
       message.channel.send({
         content: tag.comment
-          ? `> ${tag.comment}\n` + `_Tag n°**${tag.id}**_`
-          : `Tag n°**${tag.id}**`,
+          ? `> ${tag.comment}\n` +
+            `_Tag n°**${tag.id}**_` +
+            (tag.rating
+              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                  tag.rating.toFixed()
+                )}`
+              : "")
+          : `Tag n°**${tag.id}**` +
+            (tag.rating
+              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                  tag.rating.toFixed()
+                )}`
+              : ""),
         files: [tag.attachment],
       });
     } else {
       message.channel.send(
         tag.comment
-          ? `> ${tag.comment}\n` + `Tag n°**${tag.id}**`
-          : `Tag n°**${tag.id}**`
+          ? `> ${tag.comment}\n` +
+              `Tag n°**${tag.id}**` +
+              (tag.rating
+                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                    tag.rating.toFixed()
+                  )}`
+                : "")
+          : `Tag n°**${tag.id}**` +
+              (tag.rating
+                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                    tag.rating.toFixed()
+                  )}`
+                : "")
       );
     }
   } else {

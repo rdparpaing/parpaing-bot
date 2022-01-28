@@ -11,7 +11,7 @@ module.exports = (message, color, argv) => {
         {
           name: "Créer un tag/Ajouter un élément à un tag",
           value:
-            "``+<tag> <commentaire>``\n" +
+            "``g+<tag> <commentaire>``\n" +
             ". Une pièce jointe est autorisée. \nles pings ne sont pas autorisés.",
         },
         {
@@ -29,6 +29,10 @@ module.exports = (message, color, argv) => {
         {
           name: "Lister les ids d'un tag",
           value: "``gl.<tag>``",
+        },
+        {
+          name: "Noter un tag (nombre entière entre 0 et 5)",
+          value: "``gr.<tag> <rating>``",
         },
       ])
       .setTimestamp(Date.now())
