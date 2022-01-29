@@ -1,3 +1,5 @@
+const sendTag = require("../functions/sendTag")
+
 module.exports = async (message, supabase) => {
   const _tag = message.content.slice(2).split(" ")[0];
   if (_tag == "*") {
@@ -22,42 +24,7 @@ module.exports = async (message, supabase) => {
     .eq("tag", _tag);
   if (res.data.length > 0) {
     const tag = res.data[Math.floor(Math.random() * res.data.length)];
-    if (tag.attachment) {
-      message.channel.send({
-        content: tag.comment
-          ? `> ${tag.comment}\n` +
-            `_Tag n°**${tag.id}**_` +
-            (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : "")
-          : `Tag n°**${tag.id}**` +
-            (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : ""),
-        files: [tag.attachment],
-      });
-    } else {
-      message.channel.send(
-        tag.comment
-          ? `> ${tag.comment}\n` +
-              `Tag n°**${tag.id}**` +
-              (tag.rating
-                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                    tag.rating.toFixed()
-                  )}`
-                : "")
-          : `Tag n°**${tag.id}**` +
-              (tag.rating
-                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                    tag.rating.toFixed()
-                  )}`
-                : "")
-      );
-    }
+    sendTag(message, tag)
   } else {
     message.reply(":x: Ce tag n'existe pas !");
   }

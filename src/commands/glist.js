@@ -27,10 +27,10 @@ module.exports = async (message, supabase) => {
         }
         message.channel.send(str);
       } else {
-        message.reply(":x: Il n'y a pas d'éléments à afficher !");
+        message.react("❌");
       }
     } else {
-      message.reply(":x: Ce groupe n'existe pas !");
+      message.react("❌");
     }
   } else {
     const res1 = await supabase.from("groups").select("name,tags");

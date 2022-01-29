@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { version } = require("../../package.json")
 
 module.exports = (message, color, argv) => {
   let embed = new MessageEmbed();
@@ -36,7 +37,7 @@ module.exports = (message, color, argv) => {
         },
       ])
       .setTimestamp(Date.now())
-      .setFooter("Fait par Cookie", "https://i.imgur.com/jDCbugp.png");
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   } else if (argv == "groupes") {
     embed
       .setTitle("Aide de ParpaingBot")
@@ -59,7 +60,7 @@ module.exports = (message, color, argv) => {
         },
       ])
       .setTimestamp(Date.now())
-      .setFooter("Fait par Cookie", "https://i.imgur.com/jDCbugp.png");
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   } else {
     embed
       .setTitle("Aide de ParpaingBot")
@@ -82,7 +83,7 @@ module.exports = (message, color, argv) => {
         },
       ])
       .setTimestamp(Date.now())
-      .setFooter("Fait par Cookie", "https://i.imgur.com/jDCbugp.png");
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   }
   message.channel.send({
     embeds: [embed],

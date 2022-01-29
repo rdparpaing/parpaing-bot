@@ -18,9 +18,9 @@ module.exports = async (message, supabase) => {
     if (res.statusText == "Created") {
       message.react("✅");
     } else {
-      message.channel.send(":x: Une erreur est survenue.");
+      message.react("❌");
     }
   } else {
-    message.reply(":x: Le groupe doit contenir au moins un nom et un tag !");
+    message.react("❌");
   }
 };

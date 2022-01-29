@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 module.exports = async (message, supabase, uploadChannel) => {
   const tag = message.content.slice(2).split(" ")[0];
   if (tag == "*") {
-    message.react(":x:");
+    message.react("❌");
   }
   const comment = message.content.split(" ").slice(1).join(" ");
   if (
@@ -12,7 +12,7 @@ module.exports = async (message, supabase, uploadChannel) => {
     message.mentions.users.size > 0 ||
     message.mentions.channels.size > 0
   ) {
-    message.reply(":x: Vous ne pouvez pas ping quelqu'un ou quelque chose !");
+    message.react("❌");
     return;
   }
   if (message.attachments.size > 0) {
@@ -34,9 +34,7 @@ module.exports = async (message, supabase, uploadChannel) => {
     });
   } else {
     if (message.content.replace(/[\s\n\*\_\`]+/gi, "") == "+" + tag) {
-      message.channel.send(
-        ":x: Mettez un commentaire ou une pièce-jointe pour poster !"
-      );
+      message.react("❌");
       return;
     } else {
       res = await supabase.from("archive").insert({
@@ -45,8 +43,8 @@ module.exports = async (message, supabase, uploadChannel) => {
       });
     }
   }
-  if (res.statusText != "Created") {
-    message.channel.send(":x: Une erreur est survenue.");
+  if (res.status != 200) {
+    message.react("❌");
   } else {
     message.channel.send(
       "✅ Votre post a été créé avec l'ID **" + res.data[0].id + "** !"

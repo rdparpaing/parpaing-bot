@@ -13,6 +13,6 @@ module.exports = async (message, supabase) => {
       `Le tag "**${tag}**" contient uniquement l'id **${res.data[0].id}**`
     );
   } else {
-    message.reply(":x: Ce tag n'existe pas !");
+    message.react("❌");
   }
 };
