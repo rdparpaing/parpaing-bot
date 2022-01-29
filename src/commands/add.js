@@ -43,7 +43,7 @@ module.exports = async (message, supabase, uploadChannel) => {
       });
     }
   }
-  if (res.status != 200) {
+  if (res.statusText != "Created") {
     message.react("❌");
   } else {
     message.channel.send(

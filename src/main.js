@@ -42,6 +42,7 @@ const deleteGroup = require("./commands/deleteGroup");
 const glist = require("./commands/glist");
 const rate = require("./commands/rate");
 const createAlias = require("./commands/createAlias");
+const update = require("./commands/update")
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -122,6 +123,10 @@ client.on("messageCreate", async (message) => {
     rate(message, supabase);
   } else if (message.content.split(" ")[0] == "g!alias") {
     createAlias(message, supabase);
+  } else if (
+    message.content.startsWith("gu.") &&
+    !message.content.startsWith("gu. ")) {
+    update(message, supabase)
   }
 });
 
