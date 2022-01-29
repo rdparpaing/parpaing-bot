@@ -75,6 +75,11 @@ module.exports = (message, color, argv) => {
           value:
             "``g!list`` lister les groupes\n``g!list <groupe>`` lister les tags d'un groupe",
         },
+        {
+          name: "Créer un alias",
+          value:
+            "``g!alias <id> <alias>``",
+        },
       ])
       .setTimestamp(Date.now())
       .setFooter("Fait par Cookie", "https://i.imgur.com/jDCbugp.png");
