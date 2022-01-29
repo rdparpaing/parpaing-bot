@@ -14,31 +14,37 @@ module.exports = async (message, supabase) => {
       if (tag.attachment) {
         message.channel.send({
           content: tag.comment
-            ? `> ${tag.comment}\n` + `_Tag n°**${tag.id}**_ *${tag.tag}*` + (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : "")
-            : `Tag n°**${tag.id}** *${tag.tag}*` + (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : ""),
+            ? `> ${tag.comment}\n` +
+              `_Tag n°**${tag.id}**_ *${tag.tag}*` +
+              (tag.rating
+                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                    tag.rating.toFixed()
+                  )}`
+                : "")
+            : `Tag n°**${tag.id}** *${tag.tag}*` +
+              (tag.rating
+                ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                    tag.rating.toFixed()
+                  )}`
+                : ""),
           files: [tag.attachment],
         });
       } else {
         message.channel.send(
           tag.comment
-            ? `> ${tag.comment}\n` + `Tag n°**${tag.id}** *${tag.tag}*` + (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : "")
-            : `Tag n°**${tag.id}** *${tag.tag}*` + (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : "")
+            ? `> ${tag.comment}\n` +
+                `Tag n°**${tag.id}** *${tag.tag}*` +
+                (tag.rating
+                  ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                      tag.rating.toFixed()
+                    )}`
+                  : "")
+            : `Tag n°**${tag.id}** *${tag.tag}*` +
+                (tag.rating
+                  ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                      tag.rating.toFixed()
+                    )}`
+                  : "")
         );
       }
     } else {
