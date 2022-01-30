@@ -3,17 +3,19 @@ const sendTag = require("../functions/sendTag")
 
 module.exports = async (message, supabase) => {
   const id = message.content.slice(2).split(" ")[0];
+  console.log(id)
   if (isNaN(parseInt(id))) {
     res = await supabase
       .from("archive")
       .select("id,comment,attachment,rating")
       .eq("alias", id);
   } else {
-    const res = await supabase
+    res = await supabase
       .from("archive")
       .select("id,comment,attachment,rating")
       .eq("id", id);
   }
+  if (!res) return
   if (isNull(res.data)) {
     message.react("❌");
     return;
