@@ -3,7 +3,12 @@ const { createClient } = require("@supabase/supabase-js");
 
 const { Client } = require("discord.js");
 const client = new Client({
-  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"],
+  intents: [
+    "GUILDS",
+    "GUILD_MESSAGES",
+    "GUILD_MESSAGE_REACTIONS",
+    "DIRECT_MESSAGES",
+  ],
 });
 const { isNull } = require("underscore");
 
@@ -43,8 +48,8 @@ const glist = require("./commands/glist");
 const rate = require("./commands/rate");
 const createAlias = require("./commands/createAlias");
 const update = require("./commands/update");
-const updatet = require("./commands/updatet")
-const ldm = require("./commands/ldm")
+const updatet = require("./commands/updatet");
+const ldm = require("./commands/ldm");
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -75,8 +80,8 @@ client.on("messageCreate", async (message) => {
   ) {
     deleteGroup(message, supabase);
   } else if (
-    message.content.startsWith("g-") &&
-    !message.content.startsWith("g- ")
+    message.content.startsWith("g*") &&
+    !message.content.startsWith("g* ")
   ) {
     remove(message, supabase);
   } else if (
@@ -127,15 +132,16 @@ client.on("messageCreate", async (message) => {
     createAlias(message, supabase);
   } else if (
     message.content.startsWith("gu.") &&
-    !message.content.startsWith("gu. ")) {
-    update(message, supabase)
-    
+    !message.content.startsWith("gu. ")
+  ) {
+    update(message, supabase);
   } else if (
     message.content.startsWith("gut.") &&
-    !message.content.startsWith("gut. ")) {
-    updatet(message, supabase)
-  } else if (message.content.split(" ")[0] == "g!ldm") {
-    ldm(message)
+    !message.content.startsWith("gut. ")
+  ) {
+    updatet(message, supabase);
+  } else if (message.content.split(" ")[0] == "g_ldm") {
+    ldm(message);
   }
 });
 

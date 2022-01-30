@@ -35,4 +35,4 @@ module.exports = async (message, tag) => {
               : "")
     );
   }
-}
+};

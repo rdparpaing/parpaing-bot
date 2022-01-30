@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { version } = require("../../package.json")
+const { version } = require("../../package.json");
 
 module.exports = (message, color, argv) => {
   let embed = new MessageEmbed();
@@ -86,13 +86,11 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Créer un alias",
-          value:
-            "``g!alias <id> <alias>``",
+          value: "``g!alias <id> <alias>``",
         },
         {
           name: "Ludrole-meter",
-          value:
-            "``g!ldm``",
+          value: "``g!ldm``",
         },
       ])
       .setTimestamp(Date.now())

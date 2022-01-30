@@ -1,4 +1,4 @@
-const sendTag = require("../functions/sendTag")
+const sendTag = require("../functions/sendTag");
 
 module.exports = async (message, supabase) => {
   const groupName = message.content.slice(3);
@@ -13,7 +13,7 @@ module.exports = async (message, supabase) => {
       .in("tag", res1.data[0].tags);
     if (res2.data && res2.data.length > 0) {
       const tag = res2.data[Math.floor(Math.random() * res2.data.length)];
-      sendTag(message, tag)
+      sendTag(message, tag);
     } else {
       message.react("❌");
     }
