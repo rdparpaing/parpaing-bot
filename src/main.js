@@ -80,8 +80,8 @@ client.on("messageCreate", async (message) => {
   ) {
     deleteGroup(message, supabase);
   } else if (
-    message.content.startsWith("g*") &&
-    !message.content.startsWith("g* ")
+    message.content.startsWith("g-") &&
+    !message.content.startsWith("g- ")
   ) {
     remove(message, supabase);
   } else if (
@@ -140,7 +140,7 @@ client.on("messageCreate", async (message) => {
     !message.content.startsWith("gut. ")
   ) {
     updatet(message, supabase);
-  } else if (message.content.split(" ")[0] == "g_ldm") {
+  } else if (message.content.split(" ")[0] == "g!ldm") {
     ldm(message);
   }
 });
