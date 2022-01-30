@@ -33,7 +33,15 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Noter un tag (nombre entière entre 0 et 5)",
-          value: "``gr.<tag> <rating>``",
+          value: "``gr.<id> <rating>``",
+        },
+        {
+          name: "Mettre à jour le commentaire d'un élément",
+          value: "``gu.<id> <commentaire>``",
+        },
+        {
+          name: "Mettre à jour le tag d'un élément",
+          value: "``gut.<id> <tag>``",
         },
       ])
       .setTimestamp(Date.now())
@@ -80,6 +88,11 @@ module.exports = (message, color, argv) => {
           name: "Créer un alias",
           value:
             "``g!alias <id> <alias>``",
+        },
+        {
+          name: "Ludrole-meter",
+          value:
+            "``g!ldm``",
         },
       ])
       .setTimestamp(Date.now())

@@ -42,7 +42,9 @@ const deleteGroup = require("./commands/deleteGroup");
 const glist = require("./commands/glist");
 const rate = require("./commands/rate");
 const createAlias = require("./commands/createAlias");
-const update = require("./commands/update")
+const update = require("./commands/update");
+const updatet = require("./commands/updatet")
+const ldm = require("./commands/ldm")
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -127,14 +129,13 @@ client.on("messageCreate", async (message) => {
     message.content.startsWith("gu.") &&
     !message.content.startsWith("gu. ")) {
     update(message, supabase)
+    
+  } else if (
+    message.content.startsWith("gut.") &&
+    !message.content.startsWith("gut. ")) {
+    updatet(message, supabase)
   } else if (message.content.split(" ")[0] == "g!ldm") {
-    let m = await message.channel.send("**Veuillez noter le niveau de drole de cet évènement** (nombre entier entre 0 et 12)")
-    m.channel.awaitMessages(m => !isNaN(parseInt(m)), {
-      time: 30000,
-      errors: ["time"]
-    }).then(collected => {
-      collected.map(i => parseInt(i.content))
-    })
+    ldm(message)
   }
 });
 

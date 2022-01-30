@@ -3,7 +3,6 @@ const sendTag = require("../functions/sendTag")
 
 module.exports = async (message, supabase) => {
   const id = message.content.slice(2).split(" ")[0];
-  console.log(id)
   if (isNaN(parseInt(id))) {
     res = await supabase
       .from("archive")
