@@ -6,12 +6,12 @@ module.exports = async (message, supabase) => {
   if (isNaN(parseInt(id))) {
     res = await supabase
       .from("archive")
-      .select("id,comment,attachment,rating")
+      .select("id,comment,attachment,rating,tag")
       .eq("alias", id);
   } else {
     res = await supabase
       .from("archive")
-      .select("id,comment,attachment,rating")
+      .select("id,comment,attachment,rating,tag")
       .eq("id", id);
   }
   if (!res) return;

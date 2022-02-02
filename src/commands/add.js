@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = async (message, supabase, uploadChannel) => {
   const tag = message.content.slice(2).split(" ")[0];
-  if (tag == "*") {
+  if (tag == "ldm") {
     message.react("❌");
   }
   const comment = message.content.split(" ").slice(1).join(" ");

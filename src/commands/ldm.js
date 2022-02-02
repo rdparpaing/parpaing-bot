@@ -1,6 +1,7 @@
 const { ludrole } = require("../data/constants.json");
 
-module.exports = async (message) => {
+module.exports = async (message, supabase) => {
+  const joke = message.content.split(" ").slice(1).join(" ")
   let m = await message.channel.send(
     "**Veuillez noter le niveau de drole de cet évènement** (nombre entier entre 0 et 12)"
   );
@@ -11,7 +12,7 @@ module.exports = async (message) => {
       time: 30000,
       errors: ["time"],
     })
-    .catch((collected) => {
+    .catch(async (collected) => {
       let voters = [];
       let sum = 0;
       collected = Array.from(collected.values());
@@ -33,6 +34,13 @@ module.exports = async (message) => {
               ludrole[Math.floor(sum / voters.length)]
             }**.`
         );
+        if (joke.replace(/\s/g, "") != "") {
+          const res = await supabase.from("archive")
+            .insert({comment: joke, tag: "ldm", rating: (sum / voters.length).toFixed(1)})
+          message.react("✅")
+        } else {
+          message.react("🟡")
+        }
       }
     });
 };

@@ -20,7 +20,7 @@ module.exports = async (message, supabase) => {
   }
   const res = await supabase
     .from("archive")
-    .select("id,comment,attachment,rating")
+    .select("id,comment,attachment,rating,tag")
     .eq("tag", _tag);
   if (res.data.length > 0) {
     const tag = res.data[Math.floor(Math.random() * res.data.length)];
