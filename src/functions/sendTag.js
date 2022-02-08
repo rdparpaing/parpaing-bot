@@ -1,11 +1,17 @@
-const { ludrole } = require("../data/constants.json")
+const { ludrole } = require("../data/constants.json");
 
 module.exports = async (message, tag) => {
   if (tag.tag == "ldm") {
-    message.channel.send(`> ${tag.comment}\n` +
-            `Tag n°**${tag.id}**` +
-            (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}**, ce qui correspond à une blague **${ludrole[tag.rating.toFixed()]}**.` : "")
+    message.channel.send(
+      `> ${tag.comment}\n` +
+        `Tag n°**${tag.id}**` +
+        (tag.rating
+          ? `, Note: **${tag.rating.toFixed(
+              1
+            )}**, ce qui correspond à une blague **${
+              ludrole[tag.rating.toFixed()]
+            }**.`
+          : "")
     );
     return;
   }

@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { createClient } = require("@supabase/supabase-js");
 
-const { Client } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 const client = new Client({
   intents: [
     "GUILDS",
@@ -10,8 +10,6 @@ const client = new Client({
     "DIRECT_MESSAGES",
   ],
 });
-const { isNull } = require("underscore");
-
 const app = require("express")();
 
 app.get("/", (req, res) => {
@@ -50,6 +48,7 @@ const createAlias = require("./commands/createAlias");
 const update = require("./commands/update");
 const updatet = require("./commands/updatet");
 const ldm = require("./commands/ldm");
+const social = require("./commands/social");
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -74,6 +73,13 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
+  if (message.author.bot) return;
+  if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
+    console.log("pg")
+    social(supabase, message.author.id, -2);
+  } else if (/(\s|\n|^)feur|ssonneuse|bril/gmi.test(message.content.toLowerCase())) {
+    social(supabase, message.author.id, -1);
+  }
   if (
     message.content.startsWith("g--") &&
     !message.content.startsWith("g-- ")
@@ -140,8 +146,55 @@ client.on("messageCreate", async (message) => {
     !message.content.startsWith("gut. ")
   ) {
     updatet(message, supabase);
-  } else if (message.content.split(" ")[0] == "g_ldm") {
+  } else if (message.content.split(" ")[0] == "g!ldm") {
     ldm(message, supabase);
+  } else if (message.content.split(" ")[0] == "g!meilleurs") {
+    var scd = (await supabase.from("srs")
+      .select('discord_id,rating')).data
+    if (scd.length == 0) {
+      message.react("❌")
+      return;
+    }
+    scd = scd.sort((a, b) => b.rating - a.rating).slice(0, scd.length >= 5 ? 5 : scd.length)
+    let embed = new MessageEmbed()
+      .setTitle("**SRS**: Meilleurs citoyens")
+      .setColor("GREEN")
+      .setAuthor("Social RdP System", "https://i.imgur.com/dSl4OCN.png")
+      .setDescription("Voici les 5 meilleurs citoyens du régime")
+      .setFooter("Gloire au régime.")
+    for (i in scd) {
+      embed.addField(`**${(Number(i)+1)}${(i == 0) ? "ᵉʳᵉ" : "ᵉᵐᵉ"} place:**`, `<@${scd[i].discord_id}> avec **${scd[i].rating}** points de SC.`)
+    }
+    message.channel.send({
+      embeds: [embed],
+      allowedMentions: [] 
+    })
+  }
+});
+
+client.on("messageReactionAdd", (reaction, user) => {
+  if (reaction.name == "⭐" && reaction.count == 4) {
+    social(supabase, user.id, 4);
+  } else if (reaction.name == "⭐" && reaction.count == 10) {
+    social(supabase, user.id, 8);
+  }
+  if (reaction.name == "♻️" && reaction.count == 4) {
+    social(supabase, user.id, -4);
+  } else if (reaction.name == "♻️" && reaction.count == 10) {
+    social(supabase, user.id, -8);
+  }
+});
+
+client.on("messageReactionRemove", (reaction, user) => {
+  if (reaction.name == "⭐" && reaction.count == 3) {
+    social(supabase, user.id, -4);
+  } else if (reaction.name == "⭐" && reaction.count == 9) {
+    social(supabase, user.id, -8);
+  }
+  if (reaction.name == "♻️" && reaction.count == 3) {
+    social(supabase, user.id, 4);
+  } else if (reaction.name == "♻️" && reaction.count == 9) {
+    social(supabase, user.id, 8);
   }
 });
 
