@@ -92,6 +92,10 @@ module.exports = (message, color, argv) => {
           name: "Ludrole-meter",
           value: "``g!ldm``",
         },
+        {
+          name: "SRS: Pire/Meilleurs",
+          value: "``g!pire``, ``g!meilleurs``",
+        },
       ])
       .setTimestamp(Date.now())
       .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
