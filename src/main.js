@@ -49,6 +49,7 @@ const update = require("./commands/update");
 const updatet = require("./commands/updatet");
 const ldm = require("./commands/ldm");
 const social = require("./commands/social");
+const socialRanks = require("./commands/socialRanks")
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -149,26 +150,9 @@ client.on("messageCreate", async (message) => {
   } else if (message.content.split(" ")[0] == "g!ldm") {
     ldm(message, supabase);
   } else if (message.content.split(" ")[0] == "g!meilleurs") {
-    var scd = (await supabase.from("srs")
-      .select('discord_id,rating')).data
-    if (scd.length == 0) {
-      message.react("❌")
-      return;
-    }
-    scd = scd.sort((a, b) => b.rating - a.rating).slice(0, scd.length >= 5 ? 5 : scd.length)
-    let embed = new MessageEmbed()
-      .setTitle("**SRS**: Meilleurs citoyens")
-      .setColor("GREEN")
-      .setAuthor("Social RdP System", "https://i.imgur.com/dSl4OCN.png")
-      .setDescription("Voici les 5 meilleurs citoyens du régime")
-      .setFooter("Gloire au régime.")
-    for (i in scd) {
-      embed.addField(`**${(Number(i)+1)}${(i == 0) ? "ᵉʳᵉ" : "ᵉᵐᵉ"} place:**`, `<@${scd[i].discord_id}> avec **${scd[i].rating}** points de SC.`)
-    }
-    message.channel.send({
-      embeds: [embed],
-      allowedMentions: [] 
-    })
+    socialRanks(1, message, supabase)
+  } else if (message.content.split(" ")[0] == "g!pire") {
+    socialRanks(-1, message, supabase)
   }
 });
 
