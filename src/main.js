@@ -153,7 +153,7 @@ client.on("messageCreate", async (message) => {
     !message.content.startsWith("gut. ")
   ) {
     updatet(message, supabase);
-  } else if (message.content.split(" ")[0] == "g_ldm") {
+  } else if (message.content.split(" ")[0] == "g!ldm") {
     ldm(message, supabase);
   } else if (message.content.split(" ")[0] == "g!meilleurs") {
     socialRanks(1, message, supabase);
