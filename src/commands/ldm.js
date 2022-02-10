@@ -18,7 +18,10 @@ module.exports = async (message, supabase) => {
       let sum = 0;
       collected = Array.from(collected.values());
       for (i in collected) {
-        if (message.mentions.users.last() && collected[i].author.id == message.mentions.users.last().id) {
+        if (
+          message.mentions.users.last() &&
+          collected[i].author.id == message.mentions.users.last().id
+        ) {
           collected[i].react("❌");
           continue;
         }
@@ -40,33 +43,25 @@ module.exports = async (message, supabase) => {
             }**.`
         );
         const mention = joke.split(" ")[joke.split(" ").length - 1];
-        console.log(mention)
         if (/<@!?(\d{17,19})>/g.test(mention)) {
-          if ((sum / voters.length) >= 10) {
-            console.log(1)
+          if (sum / voters.length >= 10) {
+            console.log(1);
             social(supabase, message.mentions.users.last().id, 10);
-          } else if ((sum / voters.length) >= 5) {
+          } else if (sum / voters.length >= 5) {
             social(supabase, message.mentions.users.last().id, 5);
-          } else if ((sum / voters.length) <= 3) {
+          } else if (sum / voters.length <= 3) {
             social(supabase, message.mentions.users.last().id, -10);
           }
-          joke.split(" ").slice(0, -1).join(" ");
+          joke = joke.split(" ").slice(0, -1).join(" ");
         }
         joke = joke.replace("@", "@​");
         if (joke.replace(/\s/g, "") != "") {
-          const res = await supabase
-            .from("archive")
-            .insert({
-              comment: joke,
-              tag: "ldm",
-              rating: (sum / voters.length).toFixed(1),
-            });
           message.react("✅");
         } else {
           message.react("🟡");
         }
       } else {
-        message.react("❌")
+        message.react("❌");
       }
     });
 };

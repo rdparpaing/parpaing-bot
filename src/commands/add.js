@@ -1,6 +1,12 @@
-const axios = require("axios").default;
 const Discord = require("discord.js");
+const { SupabaseClient } = require("@supabase/supabase-js");
 
+/**
+ * Adds a post.
+ * @param {Discord.Message} message
+ * @param {SupabaseClient} supabase
+ * @param {Discord.TextChannel} uploadChannel
+ */
 module.exports = async (message, supabase, uploadChannel) => {
   const tag = message.content.slice(2).split(" ")[0];
   if (tag == "ldm") {

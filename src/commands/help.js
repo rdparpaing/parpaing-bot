@@ -69,6 +69,48 @@ module.exports = (message, color, argv) => {
       ])
       .setTimestamp(Date.now())
       .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
+  } else if (argv == "posts_read") {
+    embed
+      .setTitle("Aide de ParpaingBot")
+      .setColor(color)
+      .setDescription("URL de base: `https://parpaing-bot.thatcookie.repl.co`\n"
+        + "⚠ toujours ajouter ``?auth=<MDP>`` à la fin de l'URL\n(MDPs épinglés dans <#930510670326288404>)")
+      .addFields([
+        {
+          name: "Lire un élément avec son id/alias",
+          value: "``/posts/get/:id``",
+        },
+        {
+          name: "Lister les ids d'un tag",
+          value: "``/posts/l/tag/:tag``",
+        },
+        {
+          name: "Lister les tags d'un groupe",
+          value: "``/posts/l/group/:group``",
+        },
+        {
+          name: "Lister les groupes",
+          value: "``/posts/l/``",
+        },
+        {
+          name: "Lire un élément aléatoire",
+          value: "``/posts/r/``",
+        },
+        {
+          name: "Lire un élément aléatoire d'un tag",
+          value: "``/posts/r/tag/:tag``",
+        },
+        {
+          name: "Lire un élément aléatoire d'un groupe",
+          value: "``/posts/r/group/:group``",
+        },
+        {
+          name: "Obtenir tous les posts d'un tag",
+          value: "``/posts/tags/:tag``",
+        },
+      ])
+      .setTimestamp(Date.now())
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   } else {
     embed
       .setTitle("Aide de ParpaingBot")
@@ -95,6 +137,10 @@ module.exports = (message, color, argv) => {
         {
           name: "SRS: Pire/Meilleurs",
           value: "``g!pire``, ``g!meilleurs``",
+        },
+        {
+          name: "Aide pour les APIs",
+          value: "``g!help <api>`` (api peut être ``posts_read`` (la suite arrive))",
         },
       ])
       .setTimestamp(Date.now())

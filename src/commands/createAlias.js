@@ -1,3 +1,11 @@
+const Discord = require("discord.js");
+const { SupabaseClient } = require("@supabase/supabase-js");
+
+/**
+ * Creates an alias.
+ * @param {Discord.Message} message
+ * @param {SupabaseClient} supabase
+ */
 module.exports = async (message, supabase) => {
   const argv = message.content.split(" ").slice(1);
   const id = parseInt(argv[0]);

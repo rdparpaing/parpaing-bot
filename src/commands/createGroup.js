@@ -1,3 +1,11 @@
+const Discord = require("discord.js");
+const { SupabaseClient } = require("@supabase/supabase-js");
+
+/**
+ * Creates a group.
+ * @param {Discord.Message} message
+ * @param {SupabaseClient} supabase
+ */
 module.exports = async (message, supabase) => {
   const groupName = message.content.slice(3).split(" ")[0];
   const groupTags = message.content

@@ -12,11 +12,11 @@ const client = new Client({
 });
 const app = require("express")();
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.status(200).json({ status: "ok" });
 });
 
-app.listen(process.env.PORT || 8080, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Serveur à l'écoute");
 });
 
@@ -32,6 +32,7 @@ const supabase = createClient(
   process.env.SUPABASE_KEY,
   options
 );
+module.exports.supabase = supabase;
 
 const add = require("./commands/add");
 const remove = require("./commands/delete");
@@ -49,7 +50,11 @@ const update = require("./commands/update");
 const updatet = require("./commands/updatet");
 const ldm = require("./commands/ldm");
 const social = require("./commands/social");
-const socialRanks = require("./commands/socialRanks")
+const socialRanks = require("./commands/socialRanks");
+
+const postRoutes = require("./api/routes/postsRoutes");
+
+postRoutes(app)
 
 var uploadChannel;
 client.on("ready", async () => {
@@ -76,9 +81,10 @@ client.on("ready", async () => {
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
   if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
-    console.log("pg")
     social(supabase, message.author.id, -2);
-  } else if (/(\s|\n|^)feur|ssonneuse|bril/gmi.test(message.content.toLowerCase())) {
+  } else if (
+    /(\s|\n|^)feur|ssonneuse|bril/gim.test(message.content.toLowerCase())
+  ) {
     social(supabase, message.author.id, -1);
   }
   if (
@@ -147,12 +153,12 @@ client.on("messageCreate", async (message) => {
     !message.content.startsWith("gut. ")
   ) {
     updatet(message, supabase);
-  } else if (message.content.split(" ")[0] == "g!ldm") {
+  } else if (message.content.split(" ")[0] == "g_ldm") {
     ldm(message, supabase);
   } else if (message.content.split(" ")[0] == "g!meilleurs") {
-    socialRanks(1, message, supabase)
+    socialRanks(1, message, supabase);
   } else if (message.content.split(" ")[0] == "g!pire") {
-    socialRanks(-1, message, supabase)
+    socialRanks(-1, message, supabase);
   }
 });
 

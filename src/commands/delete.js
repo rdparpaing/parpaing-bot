@@ -1,3 +1,11 @@
+const Discord = require("discord.js");
+const { SupabaseClient } = require("@supabase/supabase-js");
+
+/**
+ * Deletes a post.
+ * @param {Discord.Message} message
+ * @param {SupabaseClient} supabase
+ */
 module.exports = async (message, supabase) => {
   const id = message.content.slice(2);
   const tag = (

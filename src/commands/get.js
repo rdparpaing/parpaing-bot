@@ -1,6 +1,14 @@
 const { isNull } = require("underscore");
 const sendTag = require("../functions/sendTag");
 
+const Discord = require("discord.js");
+const { SupabaseClient } = require("@supabase/supabase-js");
+
+/**
+ * Gets a post with its id.
+ * @param {Discord.Message} message
+ * @param {SupabaseClient} supabase
+ */
 module.exports = async (message, supabase) => {
   const id = message.content.slice(2).split(" ")[0];
   if (isNaN(parseInt(id))) {
