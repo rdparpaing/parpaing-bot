@@ -1,4 +1,4 @@
-const { ludrole } = require("../data/constants.json");
+const { ludrole } = require("../constants.json");
 const social = require("./social");
 
 module.exports = async (message, supabase) => {

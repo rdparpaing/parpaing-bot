@@ -1,4 +1,4 @@
-const { ludrole } = require("../data/constants.json");
+const { ludrole } = require("../constants.json");
 
 module.exports = async (message, tag) => {
   if (tag.tag == "ldm") {
