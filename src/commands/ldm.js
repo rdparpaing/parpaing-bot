@@ -18,15 +18,19 @@ module.exports = async (message, supabase) => {
       let sum = 0;
       collected = Array.from(collected.values());
       for (i in collected) {
-        if (
-          message.mentions.users.last() &&
-          collected[i].author.id == message.mentions.users.last().id
-        ) {
-          collected[i].react("❌");
-          continue;
-        }
-        if (voters.indexOf(collected[i].author.id) + 1) {
-          collected[i].react("❌");
+        try {
+          if (
+            message.mentions.users.last() &&
+            collected[i].author.id == message.mentions.users.last().id
+          ) {
+            collected[i].react("❌");
+            continue;
+          }
+          if (voters.indexOf(collected[i].author.id) + 1) {
+            collected[i].react("❌");
+            continue;
+          }
+        } catch {
           continue;
         }
         collected[i].react("✅");
