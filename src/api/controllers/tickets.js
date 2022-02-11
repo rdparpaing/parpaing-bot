@@ -7,15 +7,16 @@ const axios = require("axios").default
  * @param {Response} res
  */
 module.exports.create = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", '*')
   try {  
     axios.post(process.env.TICKETS_WEBHOOK_URL, {
-      username: "New " + (req.body.q2.toLowerCase() == "Other (describe in question 3)" 
+      username: "New " + (req.query.q2.slice(1).toLowerCase() == "Other (describe in question 3)" 
         ? "demand"
-        : req.body.q2.toLowerCase()),
+        : req.query.q2.slice(1).toLowerCase()),
       embeds: [{
-        title: "New ticket created for product __" + req.body.q1 + "__",
+        title: "New ticket created for product __" + req.query.q1.slice(1) + "__",
         type: "rich",
-        description: req.body.q3
+        description: req.query.q3
       }],
       allowed_mentions: []
     }).then(() => {
@@ -23,7 +24,8 @@ module.exports.create = async (req, res) => {
     }).catch(() => {
       res.send("Not OK")
     })
-  } catch {
+  } catch (err) {
+    console.log(err)
     res.send("Not OK")
   }
 }
