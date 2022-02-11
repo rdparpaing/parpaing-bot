@@ -73,8 +73,10 @@ module.exports = (message, color, argv) => {
     embed
       .setTitle("Aide de ParpaingBot")
       .setColor(color)
-      .setDescription("URL de base: `https://parpaing-bot.thatcookie.repl.co`\n"
-        + "⚠ toujours ajouter ``?auth=<MDP>`` à la fin de l'URL\n(MDPs épinglés dans <#930510670326288404>)")
+      .setDescription(
+        "URL de base: `https://parpaing-bot.thatcookie.repl.co`\n" +
+          "⚠ toujours ajouter ``?auth=<MDP>`` à la fin de l'URL\n(MDPs épinglés dans <#930510670326288404>)"
+      )
       .addFields([
         {
           name: "Lire un élément avec son id/alias",
@@ -140,7 +142,8 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Aide pour les APIs",
-          value: "``g!help <api>`` (api peut être ``posts_read`` (la suite arrive))",
+          value:
+            "``g!help <api>`` (api peut être ``posts_read`` (la suite arrive))",
         },
       ])
       .setTimestamp(Date.now())

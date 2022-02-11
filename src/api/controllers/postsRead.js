@@ -1,8 +1,8 @@
 const { Request, Response } = require("express");
 const { supabase } = require("../../main");
-const { checkAuth } = require("./auth")
-const { isNull } = require("underscore")
-const _ = require("underscore")
+const { checkAuth } = require("./auth");
+const { isNull } = require("underscore");
+const _ = require("underscore");
 
 /**
  * Gets post by id/alias.
@@ -52,14 +52,17 @@ module.exports.idlist = async (req, res) => {
     res.status(401).json({});
     return;
   }
-  const _res = await supabase.from("archive").select("id").eq("tag", req.params.tag);
+  const _res = await supabase
+    .from("archive")
+    .select("id")
+    .eq("tag", req.params.tag);
   if (_res.data.length > 0) {
     const list = _res.data.map((i) => i.id);
-    res.status(200).json(list)
+    res.status(200).json(list);
   } else {
-    res.status(200).json([])
+    res.status(200).json([]);
   }
-}
+};
 
 /**
  * Get tags list from group.
@@ -71,28 +74,28 @@ module.exports.tagslist = async (req, res) => {
     res.status(401).json({});
     return;
   }
-    const _res1 = await supabase
-      .from("groups")
-      .select("tags")
-      .eq("name", req.params.group);
-    if (_res1.data.length > 0) {
-      const _res2 = await supabase
-        .from("archive")
-        .select("id, tag, comment, attachment,rating,alias")
-        .in("tag", _res1.data[0].tags);
-      if (_res2.data.length > 0) {
-        let tagcount = {};
-        for (let i in _res2.data) {
-          tagcount[_res2.data[i].tag] = (tagcount[_res2.data[i].tag] || 0) + 1;
-        }
-        res.status(200).json(tagcount)
-      } else {
-        res.status(200).json({})
+  const _res1 = await supabase
+    .from("groups")
+    .select("tags")
+    .eq("name", req.params.group);
+  if (_res1.data.length > 0) {
+    const _res2 = await supabase
+      .from("archive")
+      .select("id, tag, comment, attachment,rating,alias")
+      .in("tag", _res1.data[0].tags);
+    if (_res2.data.length > 0) {
+      let tagcount = {};
+      for (let i in _res2.data) {
+        tagcount[_res2.data[i].tag] = (tagcount[_res2.data[i].tag] || 0) + 1;
       }
+      res.status(200).json(tagcount);
     } else {
-      res.status(200).json({})
+      res.status(200).json({});
     }
-}
+  } else {
+    res.status(200).json({});
+  }
+};
 
 /**
  * Get list of group.
@@ -111,36 +114,39 @@ module.exports.groupsList = async (req, res) => {
   let groups = res1.data.map((i) => i.name);
   let ungrouped = _.difference(tagslist, groupedtagslist);
 
-  s = {}
+  s = {};
   for (let i in groups) {
-    s[groups[i]] = res1.data[i].tags.length
+    s[groups[i]] = res1.data[i].tags.length;
   }
-  s["ungrouped"] = ungrouped.length
-  res.status(200).json(s)
-}
+  s["ungrouped"] = ungrouped.length;
+  res.status(200).json(s);
+};
 
 /**
  * Get all posts from tag
- * @param {Request} req 
- * @param {Response} res 
- * @returns 
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
  */
 module.exports.getAllFromTag = async (req, res) => {
   if (!checkAuth(req.query.auth, "POSTSAPI_READ")) {
     res.status(401).json({});
     return;
   }
-  const _res = await supabase.from("archive").select("id,comment,attachment,rating,alias").eq("tag", req.params.tag);
-  res.status(200).json(_res.data)
-}
+  const _res = await supabase
+    .from("archive")
+    .select("id,comment,attachment,rating,alias")
+    .eq("tag", req.params.tag);
+  res.status(200).json(_res.data);
+};
 
 /**
  * Get random post from tag
- * @param {Request} req 
- * @param {Response} res 
- * @returns 
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
  */
-module.exports.getRandomFromTag = async (req, res) =>  {
+module.exports.getRandomFromTag = async (req, res) => {
   if (!checkAuth(req.query.auth, "POSTSAPI_READ")) {
     res.status(401).json({});
     return;
@@ -151,39 +157,39 @@ module.exports.getRandomFromTag = async (req, res) =>  {
     .eq("tag", req.params.tag);
   if (_res.data.length > 0) {
     const post = _res.data[Math.floor(Math.random() * _res.data.length)];
-    res.status(200).json(post)
+    res.status(200).json(post);
   } else {
-    res.status(200).json({})
+    res.status(200).json({});
   }
-}
+};
 
 /**
  * Get random post
- * @param {Request} req 
- * @param {Response} res 
- * @returns 
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
  */
- module.exports.getRandom = async (req, res) =>  {
+module.exports.getRandom = async (req, res) => {
   if (!checkAuth(req.query.auth, "POSTSAPI_READ")) {
     res.status(401).json({});
     return;
   }
   const _res = await supabase
     .from("archive")
-    .select("id,comment,attachment,rating,tag")
+    .select("id,comment,attachment,rating,tag");
   if (_res.data.length > 0) {
     const post = _res.data[Math.floor(Math.random() * _res.data.length)];
-    res.status(200).json(post)
+    res.status(200).json(post);
   } else {
-    res.status(200).json({})
+    res.status(200).json({});
   }
-}
+};
 
 /**
  * Get random post from group
- * @param {Request} req 
- * @param {Response} res 
- * @returns 
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
  */
 module.exports.getRandomFromGroup = async (req, res) => {
   const res1 = await supabase
@@ -197,11 +203,11 @@ module.exports.getRandomFromGroup = async (req, res) => {
       .in("tag", res1.data[0].tags);
     if (res2.data && res2.data.length > 0) {
       const post = res2.data[Math.floor(Math.random() * res2.data.length)];
-      res.status(200).json(post)
+      res.status(200).json(post);
     } else {
-      res.status(200).json({})
+      res.status(200).json({});
     }
   } else {
-    res.status(200).json({})
+    res.status(200).json({});
   }
-}
+};

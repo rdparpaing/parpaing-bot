@@ -1,6 +1,6 @@
 {
   "name": "parpaing-bot",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "json2csv": "^5.0.6",
     "node": "^16.13.2",
     "underscore": "^1.13.2"
   }

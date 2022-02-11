@@ -24,13 +24,13 @@ module.exports = (app) => {
   app.get("/posts/r/group/:group", postController.getRandomFromGroup);
 
   // Create post
-  app.post("/posts/create/:tag")
+  app.post("/posts/create/:tag");
   // Delete post
-  app.delete("/post/delete/:id")
+  app.delete("/post/delete/:id");
   // Update post
-  app.patch("/posts/update/:id")
+  app.patch("/posts/update/:id");
   // Rate post
-  app.patch("/posts/rate/:id")
+  app.patch("/posts/rate/:id");
   // Create alias
-  app.patch("/posts/alias/")
-}
+  app.patch("/posts/alias/");
+};
