@@ -11,7 +11,7 @@ module.exports = async (op, message, supabase) => {
     .slice(0, scd.length >= 5 ? 5 : scd.length);
   let embed = new MessageEmbed()
     .setTitle(op < 0 ? "**SRS**: Pire citoyens" : "**SRS**: Meilleurs citoyens")
-    .setColor("GREEN")
+    .setColor(op < 0 ? "RED" : "GREEN")
     .setAuthor("Social RdP System", "https://i.imgur.com/dSl4OCN.png")
     .setDescription(
       op < 0

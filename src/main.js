@@ -51,7 +51,10 @@ if (process.argv.indexOf("api") + 1) {
   });
 
   const postRoutes = require("./api/routes/postsRoutes");
+  const ticketRoutes = require("./api/routes/ticketRoutes");
+  app.use(require("express").json())
   postRoutes(app);
+  ticketRoutes(app);
 }
 
 if (process.argv.indexOf("backup") + 1) {
@@ -182,7 +185,7 @@ if (process.argv.indexOf("bot") + 1) {
       ldm(message, supabase);
     } else if (message.content.split(" ")[0] == "g!meilleurs") {
       socialRanks(1, message, supabase);
-    } else if (message.content.split(" ")[0] == "g!pire") {
+    } else if (message.content.split(" ")[0] == "g!pires") {
       socialRanks(-1, message, supabase);
     }
   });

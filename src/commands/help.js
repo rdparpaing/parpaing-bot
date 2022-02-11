@@ -138,7 +138,7 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "SRS: Pire/Meilleurs",
-          value: "``g!pire``, ``g!meilleurs``",
+          value: "``g!pires``, ``g!meilleurs``",
         },
         {
           name: "Aide pour les APIs",
