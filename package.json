@@ -1,7 +1,6 @@
 {
   "name": "parpaing-bot",
   "version": "1.7.1",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node src/main.js"
@@ -18,5 +17,17 @@
     "express": "^4.17.2",
     "json2csv": "^5.0.6",
     "underscore": "^1.13.2"
-  }
+  },
+  "devDependencies": {
+    "node": "^17.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdparpaing/parpaing-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rdparpaing/parpaing-bot/issues"
+  },
+  "homepage": "https://github.com/rdparpaing/parpaing-bot#readme",
+  "description": ""
 }
