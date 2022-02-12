@@ -68,23 +68,27 @@ if (process.argv.indexOf("backup") + 1) {
 }
 
 if (process.argv.indexOf("bot") + 1) {
-  const add = require("./commands/add");
-  const remove = require("./commands/delete");
-  const random = require("./commands/random");
-  const list = require("./commands/list");
-  const get = require("./commands/get");
-  const help = require("./commands/help");
-  const createGroup = require("./commands/createGroup");
-  const randomFromGroup = require("./commands/randomFromGroup");
-  const deleteGroup = require("./commands/deleteGroup");
-  const glist = require("./commands/glist");
-  const rate = require("./commands/rate");
-  const createAlias = require("./commands/createAlias");
-  const update = require("./commands/update");
-  const updatet = require("./commands/updatet");
-  const ldm = require("./commands/ldm");
-  const social = require("./commands/social");
-  const socialRanks = require("./commands/socialRanks");
+  // Tags commands imports
+  const add = require("./commands/tags/add");
+  const remove = require("./commands/tags/delete");
+  const random = require("./commands/tags/random");
+  const list = require("./commands/tags/list");
+  const get = require("./commands/tags/get");
+  const rate = require("./commands/tags/rate");
+  const createAlias = require("./commands/tags/createAlias");
+  const update = require("./commands/tags/update");
+  const updatet = require("./commands/tags/updatet");
+  // Groups commands imports
+  const createGroup = require("./commands/groups/createGroup");
+  const randomFromGroup = require("./commands/groups/randomFromGroup");
+  const deleteGroup = require("./commands/groups/deleteGroup");
+  const glist = require("./commands/groups/glist");
+  // Misc commands imports
+  const help = require("./commands/misc/help");
+  const ldm = require("./commands/misc/ldm");
+  // Social commands imports
+  const socialRanks = require("./commands/social/socialRanks");
+  const social = require("./functions/social");
 
   var uploadChannel;
   client.on("ready", async () => {

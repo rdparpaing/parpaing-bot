@@ -1,4 +1,4 @@
-const sendTag = require("../functions/sendTag");
+const sendTag = require("../../functions/sendTag");
 
 module.exports = async (message, supabase) => {
   const groupName = message.content.slice(3);

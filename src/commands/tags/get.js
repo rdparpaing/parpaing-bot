@@ -1,5 +1,5 @@
 const { isNull } = require("underscore");
-const sendTag = require("../functions/sendTag");
+const sendTag = require("../../functions/sendTag");
 
 const Discord = require("discord.js");
 const { SupabaseClient } = require("@supabase/supabase-js");

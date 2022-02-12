@@ -1,5 +1,5 @@
-const { ludrole } = require("../constants.json");
-const social = require("./social");
+const { ludrole } = require("../../constants.json");
+const social = require("../../functions/social");
 
 module.exports = async (message, supabase) => {
   var joke = message.content.split(" ").slice(1).join(" ");
