@@ -37,6 +37,7 @@ module.exports.createTicket = async (req, res) => {
  * @param {Response} res
  */
 module.exports.answerQuiz = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", '*')
   try {
     const userQuiz = req.query.quiz.split("")
     differences = Array(trucks.length).fill(0)
