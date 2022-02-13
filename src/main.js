@@ -51,12 +51,12 @@ if (process.argv.indexOf("api") + 1) {
   });
 
   const postRoutes = require("./api/routes/postsRoutes");
-  const ticketRoutes = require("./api/routes/ticketRoutes");
+  const otherRoutes = require("./api/routes/otherRoutes");
   app.use(require("body-parser").json())
   app.use(require("body-parser").urlencoded({ extended: true }))
   app.use(require("body-parser").raw())
   postRoutes(app);
-  ticketRoutes(app);
+  otherRoutes(app);
 }
 
 if (process.argv.indexOf("backup") + 1) {
