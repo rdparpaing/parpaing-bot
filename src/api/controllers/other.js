@@ -28,6 +28,7 @@ module.exports.createTicket = async (req, res) => {
     }).then(() => {
       if (bypassTimeLimit) {
         res.send("OK-")
+        return;
       }
       res.send("OK")
     }).catch(() => {
