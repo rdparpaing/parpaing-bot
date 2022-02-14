@@ -136,6 +136,26 @@ module.exports = (message, color, argv) => {
       ])
       .setTimestamp(Date.now())
       .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
+  } else if (argv == "posts_read") {
+    embed
+      .setTitle("Aide de ParpaingBot")
+      .setColor(color)
+      .setDescription(
+        "URL de base: `https://parpaing-bot.thatcookie.repl.co`\n" +
+          "⚠ toujours ajouter ``?auth=<MDP>`` à la fin de l'URL\n(MDPs épinglés dans <#930510670326288404>)"
+      )
+      .addFields([
+        {
+          name: "Obtenir les infos d'un citoyen avec son id",
+          value: "``/social/user/:id``",
+        },
+        {
+          name: "Lister les citoyens",
+          value: "``/social/list/``",
+        },
+      ])
+      .setTimestamp(Date.now())
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   } else {
     embed
       .setTitle("Aide de ParpaingBot")
@@ -166,7 +186,7 @@ module.exports = (message, color, argv) => {
         {
           name: "Aide pour les APIs",
           value:
-            "``g!help <api>`` (api peut être ``posts_read`` (la suite arrive))",
+            "``g!help <api>`` (api peut être ``posts_read``, ``srs_read``)",
         },
       ])
       .setTimestamp(Date.now())
