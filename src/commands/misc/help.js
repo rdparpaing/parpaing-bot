@@ -136,7 +136,7 @@ module.exports = (message, color, argv) => {
       ])
       .setTimestamp(Date.now())
       .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
-  } else if (argv == "posts_read") {
+  } else if (argv == "srs_read") {
     embed
       .setTitle("Aide de ParpaingBot")
       .setColor(color)
