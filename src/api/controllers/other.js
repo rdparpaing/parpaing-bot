@@ -9,6 +9,11 @@ const { trucks } = require("../../constants.json")
  */
 module.exports.createTicket = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", '*')
+  bypassTimeLimit = false
+  if (req.query.q3.startsWith(process.env.CANKYRE_TICKET_PASSWORD)) {
+    bypassTimeLimit = true
+    req.query.q3 = req.query.q3.slice(process.env.CANKYRE_TICKET_PASSWORD.length)
+  }
   try {  
     axios.post(process.env.TICKETS_WEBHOOK_URL, {
       username: "New " + (req.query.q2.slice(1).toLowerCase() == "Other (describe in question 3)" 
@@ -21,6 +26,9 @@ module.exports.createTicket = async (req, res) => {
       }],
       allowed_mentions: []
     }).then(() => {
+      if (bypassTimeLimit) {
+        res.send("OK-")
+      }
       res.send("OK")
     }).catch(() => {
       res.send("Not OK")

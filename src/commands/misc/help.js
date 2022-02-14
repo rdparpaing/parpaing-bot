@@ -69,6 +69,29 @@ module.exports = (message, color, argv) => {
       ])
       .setTimestamp(Date.now())
       .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
+  } else if (argv == "support") {
+    embed
+      .setTitle("Aide de ParpaingBot")
+      .setColor(color)
+      .setDescription("Voici comment obtenir du support, signaler un bug ou demander une nouvelle fonctionnalité !")
+      .addFields([
+        {
+          name: "Option n°1",
+          value:
+            "[Envoyer un ticket au développeur](https://cankyre.github.io/3-questions-report-form/).\n" +
+            "Les tickets bien faits sont la manière __la plus efficace__ de faire une réclamation. Elle sera traitée en priorité.",
+        },
+        {
+          name: "Option n°2",
+          value: "Envoyer un message dans <#930510670326288404> ou dans <#877559458815955024>",
+        },
+        {
+          name: "Option n°3",
+          value: "DM Cankyre#4718",
+        },
+      ])
+      .setTimestamp(Date.now())
+      .setFooter("Cankyre, v." + version, "https://i.imgur.com/45iXrNN.png");
   } else if (argv == "posts_read") {
     embed
       .setTitle("Aide de ParpaingBot")
@@ -117,11 +140,11 @@ module.exports = (message, color, argv) => {
     embed
       .setTitle("Aide de ParpaingBot")
       .setColor(color)
-      .setDescription("Voici comment utiliser le bot !")
+      .setDescription("Voici comment utiliser le bot !")  
       .addFields([
         {
           name: "Rubriques",
-          value: "``tags``, ``groupes`` (ex ``g!help tags``)",
+          value: "``tags``, ``groupes``, ``support`` (ex ``g!help tags``)",
         },
         {
           name: "Lister les groupes/tags",
