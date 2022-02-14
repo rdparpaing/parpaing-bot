@@ -52,11 +52,13 @@ if (process.argv.indexOf("api") + 1) {
 
   const postRoutes = require("./api/routes/postsRoutes");
   const otherRoutes = require("./api/routes/otherRoutes");
+  const socialRoutes = require("./api/routes/socialRoutes");
   app.use(require("body-parser").json())
   app.use(require("body-parser").urlencoded({ extended: true }))
   app.use(require("body-parser").raw())
   postRoutes(app);
   otherRoutes(app);
+  socialRoutes(app)
 }
 
 if (process.argv.indexOf("backup") + 1) {
@@ -89,6 +91,7 @@ if (process.argv.indexOf("bot") + 1) {
   // Social commands imports
   const socialRanks = require("./commands/social/socialRanks");
   const social = require("./functions/social");
+  const addMsg = require("./functions/addMsg")
 
   var uploadChannel;
   client.on("ready", async () => {
@@ -114,12 +117,15 @@ if (process.argv.indexOf("bot") + 1) {
 
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
+    
     if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
       social(supabase, message.author.id, -2);
     } else if (
       /(\s|\n|^)feur|ss?onn?euse|bril|ll?iam|stern/gim.test(message.content.toLowerCase())
     ) {
       social(supabase, message.author.id, -1);
+    } else {
+      addMsg(message.author.id);
     }
     if (
       message.content.startsWith("g--") &&

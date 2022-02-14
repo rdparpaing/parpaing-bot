@@ -22,15 +22,4 @@ module.exports = (app) => {
   app.get("/posts/r/", postController.getRandom);
   // Get random post from group
   app.get("/posts/r/group/:group", postController.getRandomFromGroup);
-
-  // Create post
-  app.post("/posts/create/:tag");
-  // Delete post
-  app.delete("/post/delete/:id");
-  // Update post
-  app.patch("/posts/update/:id");
-  // Rate post
-  app.patch("/posts/rate/:id");
-  // Create alias
-  app.patch("/posts/alias/");
 };

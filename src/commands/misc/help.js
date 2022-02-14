@@ -157,7 +157,7 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Ludrole-meter",
-          value: "``g!ldm``",
+          value: "``g!ldm <blague> <ping du créateur de la blague>``, ce ping sera utilisé pour le SRS",
         },
         {
           name: "SRS: Pire/Meilleurs",
