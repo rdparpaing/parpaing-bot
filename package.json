@@ -1,6 +1,6 @@
 {
   "name": "parpaing-bot",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "main": "index.js",
   "scripts": {
     "start": "node src/main.js"
