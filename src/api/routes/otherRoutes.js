@@ -11,4 +11,7 @@ module.exports = (app) => {
 
   // Get the truck for the quiz on rdparpaing.github.io
   app.get("/website/quiz", otherControllers.answerQuiz)
+
+  // Get redirects
+  app.get("/goto", otherControllers.sendRedirects)
 }

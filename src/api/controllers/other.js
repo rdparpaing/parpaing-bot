@@ -1,6 +1,6 @@
 const { Request, Response } = require("express");
 const axios = require("axios").default
-const { trucks } = require("../../constants.json")
+const { trucks, redirects } = require("../../constants.json")
 
 /**
  * Gets post by id/alias.
@@ -60,4 +60,9 @@ module.exports.answerQuiz = async (req, res) => {
   } catch (err) {
     res.send("error")
   }
+}
+
+module.exports.sendRedirects = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", '*')
+  res.json(redirects)
 }
