@@ -188,6 +188,10 @@ module.exports = (message, color, argv) => {
           value: "``g!pires``, ``g!meilleurs``",
         },
         {
+          name: "SRS: Profil de citoyen",
+          value: "``g!pires``, ``g!meilleurs``",
+        },
+        {
           name: "Aide pour les APIs",
           value:
             "``g!help <api>`` (api peut être ``posts_read``, ``srs_read``)",
