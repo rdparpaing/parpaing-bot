@@ -53,20 +53,22 @@ if (process.argv.indexOf("api") + 1) {
   const postRoutes = require("./api/routes/postsRoutes");
   const otherRoutes = require("./api/routes/otherRoutes");
   const socialRoutes = require("./api/routes/socialRoutes");
-  app.use(require("body-parser").json())
-  app.use(require("body-parser").urlencoded({ extended: true }))
-  app.use(require("body-parser").raw())
+  app.use(require("body-parser").json());
+  app.use(require("body-parser").urlencoded({ extended: true }));
+  app.use(require("body-parser").raw());
   postRoutes(app);
   otherRoutes(app);
-  socialRoutes(app)
+  socialRoutes(app);
 }
 
 if (process.argv.indexOf("backup") + 1) {
-  (async () => {const res = await supabase.from("archive").select("*");
-  const csv = parser.parse(res.data);
-  writeFile(`./src/data/backup.csv`, csv, () => {
-    console.log("backup done!");}
-  )})()
+  (async () => {
+    const res = await supabase.from("archive").select("*");
+    const csv = parser.parse(res.data);
+    writeFile(`./src/data/backup.csv`, csv, () => {
+      console.log("backup done!");
+    });
+  })();
 }
 
 if (process.argv.indexOf("bot") + 1) {
@@ -91,7 +93,7 @@ if (process.argv.indexOf("bot") + 1) {
   // Social commands imports
   const socialRanks = require("./commands/social/socialRanks");
   const social = require("./functions/social");
-  const addMsg = require("./functions/addMsg")
+  const addMsg = require("./functions/addMsg");
 
   var uploadChannel;
   client.on("ready", async () => {
@@ -117,11 +119,13 @@ if (process.argv.indexOf("bot") + 1) {
 
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
-    
+
     if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
       social(supabase, message.author.id, -2);
     } else if (
-      /(\s|\n|^)feur|ss?onn?euse|bril|ll?iam|stern/gim.test(message.content.toLowerCase())
+      /(\s|\n|^)feur|ss?onn?euse|bril|ll?iam|stern/gim.test(
+        message.content.toLowerCase()
+      )
     ) {
       social(supabase, message.author.id, -1);
     } else {
@@ -199,6 +203,29 @@ if (process.argv.indexOf("bot") + 1) {
       socialRanks(1, message, supabase);
     } else if (message.content.split(" ")[0] == "g!pires") {
       socialRanks(-1, message, supabase);
+    } else if (message.content.split(" ")[0] == "g!profil") {
+      const id = require("./functions/parseId")(message);
+      const res = await supabase.from("srs").select("*").eq("discord_id", id);
+      if (!res.data.length > 0 || !id) {
+        message.react("❌");
+        return;
+      }
+      const embed = new MessageEmbed()
+        .setTitle("**SRS**: Profil de citoyen")
+        .setColor(res.data[0].rating < 0 ? "RED" : "GREEN")
+        .setAuthor("Social RdP System", "https://i.imgur.com/dSl4OCN.png")
+        .setDescription(
+          `Voici le profil du citoyen <@${res.data[0].discord_id}>`
+        )
+        .setFooter("Gloire au régime.")
+        .addField(
+          "Profil n°" + res.data[0].id,
+          `Points: ${res.data[0].rating} + ${res.data[0].messages_count}/50`
+        );
+      message.channel.send({
+        embeds: [embed],
+        allowedMentions: [],
+      });
     }
   });
 

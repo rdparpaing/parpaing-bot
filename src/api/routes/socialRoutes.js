@@ -7,7 +7,7 @@ const social = require("../controllers/social");
  */
 module.exports = (app) => {
   // Get list of users
-  app.get("/social/list", social.list)
+  app.get("/social/list", social.list);
   // Get user
-  app.get("/social/user/:id", social.get)
-}
+  app.get("/social/user/:id", social.get);
+};

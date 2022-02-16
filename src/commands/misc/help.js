@@ -73,7 +73,9 @@ module.exports = (message, color, argv) => {
     embed
       .setTitle("Aide de ParpaingBot")
       .setColor(color)
-      .setDescription("Voici comment obtenir du support, signaler un bug ou demander une nouvelle fonctionnalité !")
+      .setDescription(
+        "Voici comment obtenir du support, signaler un bug ou demander une nouvelle fonctionnalité !"
+      )
       .addFields([
         {
           name: "Option n°1",
@@ -83,7 +85,8 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Option n°2",
-          value: "Envoyer un message dans <#930510670326288404> ou dans <#877559458815955024>",
+          value:
+            "Envoyer un message dans <#930510670326288404> ou dans <#877559458815955024>",
         },
         {
           name: "Option n°3",
@@ -160,7 +163,7 @@ module.exports = (message, color, argv) => {
     embed
       .setTitle("Aide de ParpaingBot")
       .setColor(color)
-      .setDescription("Voici comment utiliser le bot !")  
+      .setDescription("Voici comment utiliser le bot !")
       .addFields([
         {
           name: "Rubriques",
@@ -177,7 +180,8 @@ module.exports = (message, color, argv) => {
         },
         {
           name: "Ludrole-meter",
-          value: "``g!ldm <blague> <ping du créateur de la blague>``, ce ping sera utilisé pour le SRS",
+          value:
+            "``g!ldm <blague> <ping du créateur de la blague>``, ce ping sera utilisé pour le SRS",
         },
         {
           name: "SRS: Pire/Meilleurs",

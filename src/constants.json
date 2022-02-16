@@ -15,36 +15,121 @@
     "divine"
   ],
   "trucks": [
-    [[4,3,1,1,2,2,2,4], ["https://cdn.discordapp.com/attachments/923916948071403570/936300546493669436/unknown.png", 
-                         "https://media.discordapp.net/attachments/923916948071403570/923922354512465950/unknown.png", 
-                         "https://media.discordapp.net/attachments/923916948071403570/923921887116025966/unknown.png?width=1202&height=676"]],
-    [[3,4,3,0,2,0,4,1], ["https://media.discordapp.net/attachments/923916948071403570/923919889897492501/unknown.png"]],
-    [[3,2,1,3,3,3,1,2], ["https://cdn.discordapp.com/attachments/877561433297133638/923893859560345611/unknown.png"]],
-    [[3,2,2,2,3,1,0,1], ["https://media.discordapp.net/attachments/877561433297133638/923729067818242138/unknown.png", 
-                         "https://media.discordapp.net/attachments/923916948071403570/942101068274368612/unknown.png"]],
-    [[2,4,1,4,2,0,0,3], ["https://media.discordapp.net/attachments/923916948071403570/937063323390840872/unknown.png",
-                         "https://media.discordapp.net/attachments/877561433297133638/923721522508599366/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/923924615254904852/unknown.png"]],
-    [[4,2,1,2,2,0,1,4], ["https://media.discordapp.net/attachments/877561433297133638/923723945662894110/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/925487861808111616/unknown.png"]],
-    [[3,3,0,4,2,1,3,1], ["https://media.discordapp.net/attachments/923916948071403570/923917154632466452/unknown.png"]],
-    [[3,4,0,2,1,3,3,1], ["https://media.discordapp.net/attachments/923916948071403570/923926024910159883/unknown.png?width=676&height=676",
-                         "https://media.discordapp.net/attachments/923916948071403570/925491837907640390/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/925492004840951808/unknown.png"]],
-    [[0,4,2,4,1,2,4,3], ["https://media.discordapp.net/attachments/923916948071403570/931959215700971590/unknown.png?width=901&height=676",
-                         "https://media.discordapp.net/attachments/923916948071403570/925776806626332702/unknown.png"]],
-    [[1,3,0,4,1,0,3,1], ["https://media.discordapp.net/attachments/877561433297133638/923718613511311410/unknown.png"]],
-    [[4,2,0,3,1,1,2,2], ["https://media.discordapp.net/attachments/877561433297133638/923724852249116763/unknown.png"]],
-    [[2,3,3,4,3,1,0,0], ["https://media.discordapp.net/attachments/923916948071403570/923926073564090368/unknown.png?width=1013&height=676"]],
-    [[4,0,2,2,0,3,1,3], ["https://media.discordapp.net/attachments/877561433297133638/923716736602222592/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/923924825175654440/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/931672245607231548/unknown.png?width=1403&height=676"]],
-    [[3,0,4,2,2,2,0,1], ["https://media.discordapp.net/attachments/901938147137568798/923705735156756520/unknown.png",
-                         "https://media.discordapp.net/attachments/923916948071403570/925418424501424158/unknown.png"]],
-    [[0,1,4,2,2,4,0,1], ["https://media.discordapp.net/attachments/923916948071403570/923920399991967764/unknown.png"]],
-    [[4,4,4,4,4,4,4,4], ["https://media.discordapp.net/attachments/923916948071403570/925439965394006036/unknown.png",
-                         "https://cdn.discordapp.com/attachments/923916948071403570/925418952895651902/unknown.png"]],
-    [[2,2,2,2,2,2,2,2], ["https://media.discordapp.net/attachments/923916948071403570/923921251569893406/unknown.png"]]
+    [
+      [4, 3, 1, 1, 2, 2, 2, 4],
+      [
+        "https://cdn.discordapp.com/attachments/923916948071403570/936300546493669436/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/923922354512465950/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/923921887116025966/unknown.png?width=1202&height=676"
+      ]
+    ],
+    [
+      [3, 4, 3, 0, 2, 0, 4, 1],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923919889897492501/unknown.png"
+      ]
+    ],
+    [
+      [3, 2, 1, 3, 3, 3, 1, 2],
+      [
+        "https://cdn.discordapp.com/attachments/877561433297133638/923893859560345611/unknown.png"
+      ]
+    ],
+    [
+      [3, 2, 2, 2, 3, 1, 0, 1],
+      [
+        "https://media.discordapp.net/attachments/877561433297133638/923729067818242138/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/942101068274368612/unknown.png"
+      ]
+    ],
+    [
+      [2, 4, 1, 4, 2, 0, 0, 3],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/937063323390840872/unknown.png",
+        "https://media.discordapp.net/attachments/877561433297133638/923721522508599366/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/923924615254904852/unknown.png"
+      ]
+    ],
+    [
+      [4, 2, 1, 2, 2, 0, 1, 4],
+      [
+        "https://media.discordapp.net/attachments/877561433297133638/923723945662894110/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/925487861808111616/unknown.png"
+      ]
+    ],
+    [
+      [3, 3, 0, 4, 2, 1, 3, 1],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923917154632466452/unknown.png"
+      ]
+    ],
+    [
+      [3, 4, 0, 2, 1, 3, 3, 1],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923926024910159883/unknown.png?width=676&height=676",
+        "https://media.discordapp.net/attachments/923916948071403570/925491837907640390/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/925492004840951808/unknown.png"
+      ]
+    ],
+    [
+      [0, 4, 2, 4, 1, 2, 4, 3],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/931959215700971590/unknown.png?width=901&height=676",
+        "https://media.discordapp.net/attachments/923916948071403570/925776806626332702/unknown.png"
+      ]
+    ],
+    [
+      [1, 3, 0, 4, 1, 0, 3, 1],
+      [
+        "https://media.discordapp.net/attachments/877561433297133638/923718613511311410/unknown.png"
+      ]
+    ],
+    [
+      [4, 2, 0, 3, 1, 1, 2, 2],
+      [
+        "https://media.discordapp.net/attachments/877561433297133638/923724852249116763/unknown.png"
+      ]
+    ],
+    [
+      [2, 3, 3, 4, 3, 1, 0, 0],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923926073564090368/unknown.png?width=1013&height=676"
+      ]
+    ],
+    [
+      [4, 0, 2, 2, 0, 3, 1, 3],
+      [
+        "https://media.discordapp.net/attachments/877561433297133638/923716736602222592/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/923924825175654440/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/931672245607231548/unknown.png?width=1403&height=676"
+      ]
+    ],
+    [
+      [3, 0, 4, 2, 2, 2, 0, 1],
+      [
+        "https://media.discordapp.net/attachments/901938147137568798/923705735156756520/unknown.png",
+        "https://media.discordapp.net/attachments/923916948071403570/925418424501424158/unknown.png"
+      ]
+    ],
+    [
+      [0, 1, 4, 2, 2, 4, 0, 1],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923920399991967764/unknown.png"
+      ]
+    ],
+    [
+      [4, 4, 4, 4, 4, 4, 4, 4],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/925439965394006036/unknown.png",
+        "https://cdn.discordapp.com/attachments/923916948071403570/925418952895651902/unknown.png"
+      ]
+    ],
+    [
+      [2, 2, 2, 2, 2, 2, 2, 2],
+      [
+        "https://media.discordapp.net/attachments/923916948071403570/923921251569893406/unknown.png"
+      ]
+    ]
   ],
   "redirects": {
     "readme": "https://github.com/Cankyre#readme",
