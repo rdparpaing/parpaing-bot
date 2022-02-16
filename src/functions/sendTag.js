@@ -2,8 +2,9 @@ const { ludrole } = require("../constants.json");
 
 module.exports = async (message, tag) => {
   if (tag.tag == "ldm") {
-    message.channel.send(
-      `> ${tag.comment}\n` +
+    tag.comment = tag.comment.replace("​", "")
+    message.channel.send({
+      content: `> ${tag.comment}\n` +
         `Tag n°**${tag.id}**` +
         (tag.rating
           ? `, Note: **${tag.rating.toFixed(
@@ -11,7 +12,9 @@ module.exports = async (message, tag) => {
             )}**, ce qui correspond à une blague **${
               ludrole[tag.rating.toFixed()]
             }**.`
-          : "")
+          : ""),
+        allowed_mentions: []
+      }
     );
     return;
   }
@@ -32,10 +35,11 @@ module.exports = async (message, tag) => {
               )}`
             : ""),
       files: [tag.attachment],
+      allowed_mentions: []
     });
   } else {
-    message.channel.send(
-      tag.comment
+    message.channel.send({
+      content: tag.comment
         ? `> ${tag.comment}\n` +
             `Tag n°**${tag.id}**` +
             (tag.rating
@@ -48,7 +52,8 @@ module.exports = async (message, tag) => {
               ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
                   tag.rating.toFixed()
                 )}`
-              : "")
-    );
+              : ""),
+              allowed_mentions: []
+    });
   }
 };

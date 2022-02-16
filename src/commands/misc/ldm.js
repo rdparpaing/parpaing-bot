@@ -58,7 +58,6 @@ module.exports = async (message, supabase) => {
           }
           joke = joke.split(" ").slice(0, -1).join(" ");
         }
-        joke = joke.replace("@", "@​");
         if (joke.replace(/\s/g, "") != "") {
           message.react("✅");
         } else {

@@ -128,6 +128,7 @@ if (process.argv.indexOf("bot") + 1) {
       )
     ) {
       social(supabase, message.author.id, -1);
+      message.channel.send(require("./constants.json").scimg)
     } else {
       addMsg(message.author.id);
     }
@@ -230,27 +231,29 @@ if (process.argv.indexOf("bot") + 1) {
   });
 
   client.on("messageReactionAdd", (reaction, user) => {
-    if (reaction.name == "⭐" && reaction.count == 4) {
+    console.log(reaction.name)
+    if (reaction.emoji.name == "⭐" && reaction.count == 4) {
       social(supabase, user.id, 4);
-    } else if (reaction.name == "⭐" && reaction.count == 10) {
+    } else if (reaction.emoji.name == "⭐" && reaction.count == 10) {
       social(supabase, user.id, 8);
     }
-    if (reaction.name == "♻️" && reaction.count == 4) {
+    if (reaction.emoji.name == "♻️" && reaction.count == 4) {
       social(supabase, user.id, -4);
-    } else if (reaction.name == "♻️" && reaction.count == 10) {
+    } else if (reaction.emoji.name == "♻️" && reaction.count == 10) {
       social(supabase, user.id, -8);
     }
   });
 
   client.on("messageReactionRemove", (reaction, user) => {
-    if (reaction.name == "⭐" && reaction.count == 3) {
+    console.log(reaction.emoji.name)
+    if (reaction.emoji.name == "⭐" && reaction.count == 3) {
       social(supabase, user.id, -4);
-    } else if (reaction.name == "⭐" && reaction.count == 9) {
+    } else if (reaction.emoji.name == "⭐" && reaction.count == 9) {
       social(supabase, user.id, -8);
     }
-    if (reaction.name == "♻️" && reaction.count == 3) {
+    if (reaction.emoji.name == "♻️" && reaction.count == 3) {
       social(supabase, user.id, 4);
-    } else if (reaction.name == "♻️" && reaction.count == 9) {
+    } else if (reaction.emoji.name == "♻️" && reaction.count == 9) {
       social(supabase, user.id, 8);
     }
   });

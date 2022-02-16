@@ -21,15 +21,15 @@ module.exports.createTicket = async (req, res) => {
       .post(process.env.TICKETS_WEBHOOK_URL, {
         username:
           "New " +
-          (req.query.q2.slice(1).toLowerCase() ==
+          (req.query.q2.toLowerCase() ==
           "Other (describe in question 3)"
             ? "demand"
-            : req.query.q2.slice(1).toLowerCase()),
+            : req.query.q2.toLowerCase()),
         embeds: [
           {
             title:
               "New ticket created for product __" +
-              req.query.q1.slice(1) +
+              req.query.q1 +
               "__",
             type: "rich",
             description: req.query.q3,

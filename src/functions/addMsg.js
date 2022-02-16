@@ -1,20 +1,5 @@
 const { supabase } = require("../main");
 
-class MessageCache {
-  constructor() {
-    this._cache = {};
-  }
-
-  get cache() {
-    return this._cache[k];
-  }
-
-  set cache(o) {
-    this._cache[Object.keys(o)[0]] = Object.values(o)[0];
-    return o;
-  }
-}
-
 module.exports = async (id) => {
   var res = await supabase
     .from("srs")
