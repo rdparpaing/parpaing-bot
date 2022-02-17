@@ -30,7 +30,7 @@ module.exports = async (message, supabase, uploadChannel) => {
       files: [
         new Discord.MessageAttachment(
           Buffer.from(response.data, "utf-8"),
-          `file.${message.attachments.first().name.split(".")[message.attachments.first().name.split(".").length-1]}`
+          `message.attachments.first().name`
         ),
       ],
     });
