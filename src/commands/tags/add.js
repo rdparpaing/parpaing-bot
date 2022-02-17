@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { SupabaseClient } = require("@supabase/supabase-js");
+const axios = require("axios").default
 
 /**
  * Adds a post.
@@ -25,11 +26,11 @@ module.exports = async (message, supabase, uploadChannel) => {
     const response = await axios.get(message.attachments.first().attachment, {
       responseType: "arraybuffer",
     });
-    let m = await uploadChannel.send({
+      let m = await uploadChannel.send({
       files: [
         new Discord.MessageAttachment(
           Buffer.from(response.data, "utf-8"),
-          `file.${message.attachments.first().contentType.split("/")[1]}`
+          `file.${message.attachments.first().name.split(".")[message.attachments.first().name.split(".").length-1]}`
         ),
       ],
     });

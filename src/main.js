@@ -123,7 +123,7 @@ if (process.argv.indexOf("bot") + 1) {
     if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
       social(supabase, message.author.id, -2);
     } else if (
-      /(\s|\n|^)feur|ss?onn?euse|bril|ll?iam|stern/gim.test(
+      /(\s|\n|^)(ff?eur|ss?onn?euse|bril|ll?iam|stern)/gim.test(
         message.content.toLowerCase()
       )
     ) {
