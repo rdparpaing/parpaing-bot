@@ -8,6 +8,7 @@ const client = new Client({
     "GUILD_MESSAGES",
     "GUILD_MESSAGE_REACTIONS",
     "DIRECT_MESSAGES",
+    "GUILD_VOICE_STATES"
   ],
 });
 const { Parser } = require("json2csv"),
@@ -90,10 +91,26 @@ if (process.argv.indexOf("bot") + 1) {
   // Misc commands imports
   const help = require("./commands/misc/help");
   const ldm = require("./commands/misc/ldm");
+  
   // Social commands imports
   const socialRanks = require("./commands/social/socialRanks");
   const social = require("./functions/social");
   const addMsg = require("./functions/addMsg");
+
+  var badCitizens = []
+  var words = require('an-array-of-french-words')
+
+  async function fetchBadCitizen() {
+    const res = (await supabase.from("srs")
+      .select("rating,discord_id")).data
+    for (let i in res) {
+      if (parseInt(res[i].rating) <= -15) {
+
+        badCitizens.push(res[i].discord_id)
+      }
+    }
+    return badCitizens
+  }
 
   var uploadChannel;
   client.on("ready", async () => {
@@ -134,13 +151,15 @@ if (process.argv.indexOf("bot") + 1) {
     }
     if (
       message.content.startsWith("g--") &&
-      !message.content.startsWith("g-- ")
+      !message.content.startsWith("g-- ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       deleteGroup(message, supabase);
     } else if (
       message.content.startsWith("g-") &&
-      !message.content.startsWith("g- ")
-    ) {
+      !message.content.startsWith("g- ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
+    ) { 
       remove(message, supabase);
     } else if (
       message.content.startsWith("g>") &&
@@ -166,12 +185,14 @@ if (process.argv.indexOf("bot") + 1) {
       list(message, supabase);
     } else if (
       message.content.startsWith("g++") &&
-      !message.content.startsWith("g++ ")
+      !message.content.startsWith("g++ ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       createGroup(message, supabase);
     } else if (
-      message.content.startsWith("g+") &&
-      !message.content.startsWith("g+ ")
+      message.content.startsWith("d+") &&
+      !message.content.startsWith("g+ ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       add(message, supabase, uploadChannel);
     } else if (message.content.startsWith("g!help")) {
@@ -183,22 +204,26 @@ if (process.argv.indexOf("bot") + 1) {
     } else if (message.content.startsWith("g!list")) glist(message, supabase);
     else if (
       message.content.startsWith("gr.") &&
-      !message.content.startsWith("gr. ")
+      !message.content.startsWith("gr. ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       rate(message, supabase);
     } else if (message.content.split(" ")[0] == "g!alias") {
       createAlias(message, supabase);
     } else if (
       message.content.startsWith("gu.") &&
-      !message.content.startsWith("gu. ")
+      !message.content.startsWith("gu. ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       update(message, supabase);
     } else if (
       message.content.startsWith("gut.") &&
-      !message.content.startsWith("gut. ")
+      !message.content.startsWith("gut. ") &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       updatet(message, supabase);
-    } else if (message.content.split(" ")[0] == "g!ldm") {
+    } else if (message.content.split(" ")[0] == "g!ldm" &&
+      badCitizens.indexOf(message.author.id) + 1 == 0) {
       ldm(message, supabase);
     } else if (message.content.split(" ")[0] == "g!meilleurs") {
       socialRanks(1, message, supabase);
@@ -257,6 +282,34 @@ if (process.argv.indexOf("bot") + 1) {
       social(supabase, user.id, 8);
     }
   });
+
+  async function dcUser() {
+    try {
+      for (let id in badCitizens){
+        const member = await (await client.guilds.fetch("877559214740996176")).members.fetch(badCitizens[id])
+        if (member.voice.channel && Math.random() <= 0.25) {
+          member.voice.disconnect()
+        }
+        if (Math.random() <= 0.5) {
+          member.setNickname(words[Math.floor(Math.random() * words.length)])
+        }
+      }
+    } catch {
+      console.log("error")
+    }
+  }
+
+  async function increaseSc() {
+    for (let id in badCitizens){
+      await social(supabase, badCitizens[id], 5)
+    }
+    await fetchBadCitizen()
+  }
+
+  setInterval(dcUser, 60000)
+  setInterval(increaseSc, 3600000)
+
+  fetchBadCitizen()
 
   client.login(process.env.TOKEN);
 }

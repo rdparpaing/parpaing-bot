@@ -1,6 +1,6 @@
 {
   "name": "parpaing-bot",
-  "version": "1.7.5",
+  "version": "1.8.0",
   "main": "index.js",
   "scripts": {
     "start": "node src/main.js"
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^1.29.1",
+    "an-array-of-french-words": "^2.0.0",
     "axios": "^0.25.0",
     "body-parser": "^1.19.1",
     "discord.js": "^13.3.1",
