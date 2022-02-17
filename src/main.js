@@ -101,6 +101,7 @@ if (process.argv.indexOf("bot") + 1) {
   var words = require('an-array-of-french-words')
 
   async function fetchBadCitizen() {
+    badCitizens = []
     const res = (await supabase.from("srs")
       .select("rating,discord_id")).data
     for (let i in res) {

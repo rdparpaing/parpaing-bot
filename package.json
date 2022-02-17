@@ -19,9 +19,6 @@
     "json2csv": "^5.0.6",
     "underscore": "^1.13.2"
   },
-  "devDependencies": {
-    "node": "^17.4.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rdparpaing/parpaing-bot.git"
