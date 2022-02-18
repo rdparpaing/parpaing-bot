@@ -14,4 +14,7 @@ module.exports = (app) => {
 
   // Get redirects
   app.get("/goto", otherControllers.sendRedirects);
+
+  // Ping
+  app.get("/ping", otherControllers.ping);
 };

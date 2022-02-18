@@ -296,7 +296,7 @@ if (process.argv.indexOf("bot") + 1) {
         }
       }
     } catch {
-      console.log("error")
+
     }
   }
 

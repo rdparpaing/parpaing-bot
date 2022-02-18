@@ -79,3 +79,8 @@ module.exports.sendRedirects = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.json(redirects);
 };
+
+module.exports.ping = async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.send(Date.now())
+}
