@@ -60,6 +60,24 @@ if (process.argv.indexOf("api") + 1) {
   postRoutes(app);
   otherRoutes(app);
   socialRoutes(app);
+
+  // Communication with CCA
+  async function tellApiOnline() {
+    const axios = require("axios").default
+    try {
+      axios.get("https://central-api.thatcookie.repl.co/status/ping", {
+        params: {
+          auth: process.env.PING_PWD,
+          product: "pbot-api",
+          ts: Date.now()
+        }
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  setInterval(tellApiOnline, 60000)
 }
 
 if (process.argv.indexOf("backup") + 1) {
@@ -112,6 +130,24 @@ if (process.argv.indexOf("bot") + 1) {
     }
     return badCitizens
   }
+
+  // Communication with CCA
+  async function tellBotOnline() {
+    const axios = require("axios").default
+    try {
+      axios.get("https://central-api.thatcookie.repl.co/status/ping", {
+        params: {
+          auth: process.env.PING_PWD,
+          product: "pbot",
+          ts: Date.now()
+        }
+      })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  setInterval(tellBotOnline, 60000)
 
   var uploadChannel;
   client.on("ready", async () => {
@@ -256,34 +292,6 @@ if (process.argv.indexOf("bot") + 1) {
     }
   });
 
-  client.on("messageReactionAdd", (reaction, user) => {
-    console.log(reaction.name)
-    if (reaction.emoji.name == "⭐" && reaction.count == 4) {
-      social(supabase, user.id, 4);
-    } else if (reaction.emoji.name == "⭐" && reaction.count == 10) {
-      social(supabase, user.id, 8);
-    }
-    if (reaction.emoji.name == "♻️" && reaction.count == 4) {
-      social(supabase, user.id, -4);
-    } else if (reaction.emoji.name == "♻️" && reaction.count == 10) {
-      social(supabase, user.id, -8);
-    }
-  });
-
-  client.on("messageReactionRemove", (reaction, user) => {
-    console.log(reaction.emoji.name)
-    if (reaction.emoji.name == "⭐" && reaction.count == 3) {
-      social(supabase, user.id, -4);
-    } else if (reaction.emoji.name == "⭐" && reaction.count == 9) {
-      social(supabase, user.id, -8);
-    }
-    if (reaction.emoji.name == "♻️" && reaction.count == 3) {
-      social(supabase, user.id, 4);
-    } else if (reaction.emoji.name == "♻️" && reaction.count == 9) {
-      social(supabase, user.id, 8);
-    }
-  });
-
   async function dcUser() {
     try {
       for (let id in badCitizens){
@@ -302,7 +310,7 @@ if (process.argv.indexOf("bot") + 1) {
 
   async function increaseSc() {
     for (let id in badCitizens){
-      await social(supabase, badCitizens[id], 5)
+      await social(supabase, badCitizens[id], 1)
     }
     await fetchBadCitizen()
   }
