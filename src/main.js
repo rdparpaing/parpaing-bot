@@ -77,6 +77,7 @@ if (process.argv.indexOf("api") + 1) {
     }
   }
 
+  tellApiOnline()
   setInterval(tellApiOnline, 60000)
 }
 
@@ -142,11 +143,13 @@ if (process.argv.indexOf("bot") + 1) {
           ts: Date.now()
         }
       })
+      console.log("sednt")
     } catch (err) {
       console.error(err)
     }
   }
 
+  tellBotOnline()
   setInterval(tellBotOnline, 60000)
 
   var uploadChannel;
