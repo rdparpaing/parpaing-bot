@@ -71,7 +71,7 @@ if (process.argv.indexOf("api") + 1) {
           product: "pbot-api",
           ts: Date.now()
         }
-      })
+      }).catch(console.error)
     } catch (err) {
       console.error(err)
     }
@@ -142,7 +142,7 @@ if (process.argv.indexOf("bot") + 1) {
           product: "pbot",
           ts: Date.now()
         }
-      })
+      }).catch(console.error)
       console.log("sednt")
     } catch (err) {
       console.error(err)
