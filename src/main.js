@@ -8,7 +8,7 @@ const client = new Client({
     "GUILD_MESSAGES",
     "GUILD_MESSAGE_REACTIONS",
     "DIRECT_MESSAGES",
-    "GUILD_VOICE_STATES"
+    "GUILD_VOICE_STATES",
   ],
 });
 const { Parser } = require("json2csv"),
@@ -63,22 +63,24 @@ if (process.argv.indexOf("api") + 1) {
 
   // Communication with CCA
   async function tellApiOnline() {
-    const axios = require("axios").default
+    const axios = require("axios").default;
     try {
-      axios.get("https://central-api.thatcookie.repl.co/status/ping", {
-        params: {
-          auth: process.env.PING_PWD,
-          product: "pbot-api",
-          ts: Date.now()
-        }
-      }).catch(console.error)
+      axios
+        .get("https://central-api.thatcookie.repl.co/status/ping", {
+          params: {
+            auth: process.env.PING_PWD,
+            product: "pbot-api",
+            ts: Date.now(),
+          },
+        })
+        .catch(console.error);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
-  tellApiOnline()
-  setInterval(tellApiOnline, 60000)
+  tellApiOnline();
+  setInterval(tellApiOnline, 60000);
 }
 
 if (process.argv.indexOf("backup") + 1) {
@@ -110,47 +112,46 @@ if (process.argv.indexOf("bot") + 1) {
   // Misc commands imports
   const help = require("./commands/misc/help");
   const ldm = require("./commands/misc/ldm");
-  
+
   // Social commands imports
   const socialRanks = require("./commands/social/socialRanks");
   const social = require("./functions/social");
   const addMsg = require("./functions/addMsg");
 
-  var badCitizens = []
-  var words = require('an-array-of-french-words')
+  var badCitizens = [];
+  var words = require("an-array-of-french-words");
 
   async function fetchBadCitizen() {
-    badCitizens = []
-    const res = (await supabase.from("srs")
-      .select("rating,discord_id")).data
+    badCitizens = [];
+    const res = (await supabase.from("srs").select("rating,discord_id")).data;
     for (let i in res) {
       if (parseInt(res[i].rating) <= -15) {
-
-        badCitizens.push(res[i].discord_id)
+        badCitizens.push(res[i].discord_id);
       }
     }
-    return badCitizens
+    return badCitizens;
   }
 
   // Communication with CCA
   async function tellBotOnline() {
-    const axios = require("axios").default
+    const axios = require("axios").default;
     try {
-      axios.get("https://central-api.thatcookie.repl.co/status/ping", {
-        params: {
-          auth: process.env.PING_PWD,
-          product: "pbot",
-          ts: Date.now()
-        }
-      }).catch(console.error)
-      console.log("sednt")
+      axios
+        .get("https://central-api.thatcookie.repl.co/status/ping", {
+          params: {
+            auth: process.env.PING_PWD,
+            product: "pbot",
+            ts: Date.now(),
+          },
+        })
+        .catch(console.error);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
-  tellBotOnline()
-  setInterval(tellBotOnline, 60000)
+  tellBotOnline();
+  setInterval(tellBotOnline, 60000);
 
   var uploadChannel;
   client.on("ready", async () => {
@@ -185,7 +186,7 @@ if (process.argv.indexOf("bot") + 1) {
       )
     ) {
       social(supabase, message.author.id, -1);
-      message.channel.send(require("./constants.json").scimg)
+      message.channel.send(require("./constants.json").scimg);
     } else {
       addMsg(message.author.id).catch(console.error);
     }
@@ -199,7 +200,7 @@ if (process.argv.indexOf("bot") + 1) {
       message.content.startsWith("g-") &&
       !message.content.startsWith("g- ") &&
       badCitizens.indexOf(message.author.id) + 1 == 0
-    ) { 
+    ) {
       remove(message, supabase);
     } else if (
       message.content.startsWith("g>") &&
@@ -230,7 +231,7 @@ if (process.argv.indexOf("bot") + 1) {
     ) {
       createGroup(message, supabase);
     } else if (
-      message.content.startsWith("d+") &&
+      message.content.startsWith("g+") &&
       !message.content.startsWith("g+ ") &&
       badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
@@ -262,8 +263,10 @@ if (process.argv.indexOf("bot") + 1) {
       badCitizens.indexOf(message.author.id) + 1 == 0
     ) {
       updatet(message, supabase);
-    } else if (message.content.split(" ")[0] == "g!ldm" &&
-      badCitizens.indexOf(message.author.id) + 1 == 0) {
+    } else if (
+      message.content.split(" ")[0] == "g!ldm" &&
+      badCitizens.indexOf(message.author.id) + 1 == 0
+    ) {
       ldm(message, supabase);
     } else if (message.content.split(" ")[0] == "g!meilleurs") {
       socialRanks(1, message, supabase);
@@ -297,31 +300,31 @@ if (process.argv.indexOf("bot") + 1) {
 
   async function dcUser() {
     try {
-      for (let id in badCitizens){
-        const member = await (await client.guilds.fetch("877559214740996176")).members.fetch(badCitizens[id])
+      for (let id in badCitizens) {
+        const member = await (
+          await client.guilds.fetch("877559214740996176")
+        ).members.fetch(badCitizens[id]);
         if (member.voice.channel && Math.random() <= 0.25) {
-          member.voice.disconnect()
+          member.voice.disconnect();
         }
         if (Math.random() <= 0.5) {
-          member.setNickname(words[Math.floor(Math.random() * words.length)])
+          member.setNickname(words[Math.floor(Math.random() * words.length)]);
         }
       }
-    } catch {
-
-    }
+    } catch {}
   }
 
   async function increaseSc() {
-    for (let id in badCitizens){
-      await social(supabase, badCitizens[id], 1)
+    for (let id in badCitizens) {
+      await social(supabase, badCitizens[id], 1);
     }
-    await fetchBadCitizen()
+    await fetchBadCitizen();
   }
 
-  setInterval(dcUser, 60000)
-  setInterval(increaseSc, 3600000)
+  setInterval(dcUser, 60000);
+  setInterval(increaseSc, 3600000);
 
-  fetchBadCitizen()
+  fetchBadCitizen();
 
   client.login(process.env.TOKEN);
 }

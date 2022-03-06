@@ -29,14 +29,12 @@ module.exports = async (id) => {
       return 1;
     }
   } else {
-    res = await supabase
-      .from("srs")
-      .insert({
-        discord_id: id,
-        rating: "0",
-        lastmsg_ts: new Date().toISOString(),
-        messages_count: 1,
-      });
+    res = await supabase.from("srs").insert({
+      discord_id: id,
+      rating: "0",
+      lastmsg_ts: new Date().toISOString(),
+      messages_count: 1,
+    });
     return 1;
   }
 };

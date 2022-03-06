@@ -26,5 +26,5 @@ module.exports.answerQuiz = async (req, res) => {
 
 module.exports.ping = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send(Date.now())
-}
+  res.send(Date.now());
+};

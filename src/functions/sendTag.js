@@ -2,9 +2,10 @@ const { ludrole } = require("../constants.json");
 
 module.exports = async (message, tag) => {
   if (tag.tag == "ldm") {
-    tag.comment = tag.comment.replace("​", "")
+    tag.comment = tag.comment.replace("​", "");
     message.channel.send({
-      content: `> ${tag.comment}\n` +
+      content:
+        `> ${tag.comment}\n` +
         `Tag n°**${tag.id}**` +
         (tag.rating
           ? `, Note: **${tag.rating.toFixed(
@@ -13,9 +14,8 @@ module.exports = async (message, tag) => {
               ludrole[tag.rating.toFixed()]
             }**.`
           : ""),
-        allowed_mentions: []
-      }
-    );
+      allowed_mentions: [],
+    });
     return;
   }
   if (tag.attachment) {
@@ -35,25 +35,25 @@ module.exports = async (message, tag) => {
               )}`
             : ""),
       files: [tag.attachment],
-      allowed_mentions: []
+      allowed_mentions: [],
     });
   } else {
     message.channel.send({
       content: tag.comment
         ? `> ${tag.comment}\n` +
-            `Tag n°**${tag.id}**` +
-            (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : "")
+          `Tag n°**${tag.id}**` +
+          (tag.rating
+            ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                tag.rating.toFixed()
+              )}`
+            : "")
         : `Tag n°**${tag.id}**` +
-            (tag.rating
-              ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
-                  tag.rating.toFixed()
-                )}`
-              : ""),
-              allowed_mentions: []
+          (tag.rating
+            ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
+                tag.rating.toFixed()
+              )}`
+            : ""),
+      allowed_mentions: [],
     });
   }
 };
