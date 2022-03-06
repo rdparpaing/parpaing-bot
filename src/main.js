@@ -184,7 +184,7 @@ if (process.argv.indexOf("bot") + 1) {
       social(supabase, message.author.id, -1);
       message.channel.send(require("./constants.json").scimg)
     } else {
-      addMsg(message.author.id);
+      addMsg(message.author.id).catch(console.error);
     }
     if (
       message.content.startsWith("g--") &&
