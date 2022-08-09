@@ -26,7 +26,7 @@ module.exports = async (message, tag) => {
                 tag.rating.toFixed()
               )}`
             : "") + `\n> ${tag.comment}`
-        : `Tag n°**${tag.id}**` +
+        : `Tag n°**${tag.id}**, créé le ${(new Date(tag.created_at)).toLocaleDateString('fr-FR', {"dateStyle": "short"})}` +
           (tag.rating
             ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
                 tag.rating.toFixed()
@@ -38,14 +38,13 @@ module.exports = async (message, tag) => {
   } else {
     message.channel.send({
       content: tag.comment
-        ? `> ${tag.comment}\n` +
-          `Tag n°**${tag.id}**` +
+        ? `Tag n°**${tag.id}**, créé le ${(new Date(tag.created_at)).toLocaleDateString('fr-FR', {"dateStyle": "short"})}` +
           (tag.rating
             ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
                 tag.rating.toFixed()
               )}`
-            : "")
-        : `Tag n°**${tag.id}**` +
+            : "") + `\n> ${tag.comment}`
+        : `Tag n°**${tag.id}**, créé le ${(new Date(tag.created_at)).toLocaleDateString('fr-FR', {"dateStyle": "short"})}` +
           (tag.rating
             ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
                 tag.rating.toFixed()
