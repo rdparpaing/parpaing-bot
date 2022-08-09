@@ -5,15 +5,14 @@ module.exports = async (message, tag) => {
     tag.comment = tag.comment.replace("​", "");
     message.channel.send({
       content:
-        `> ${tag.comment}\n` +
-        `Tag n°**${tag.id}**` +
+        `Tag n°**${tag.id}**, créé le ${(new Date(tag.created_at)).toLocaleDateString('fr-FR', {"dateStyle": "short"})}` +
         (tag.rating
           ? `, Note: **${tag.rating.toFixed(
               1
             )}**, ce qui correspond à une blague **${
               ludrole[tag.rating.toFixed()]
             }**.`
-          : ""),
+          : "") + `\n> ${tag.comment}`,
       allowed_mentions: [],
     });
     return;
@@ -21,13 +20,12 @@ module.exports = async (message, tag) => {
   if (tag.attachment) {
     message.channel.send({
       content: tag.comment
-        ? `> ${tag.comment}\n` +
-          `_Tag n°**${tag.id}**_` +
+        ? `_Tag n°**${tag.id}**_, créé le ${(new Date(tag.created_at)).toLocaleDateString('fr-FR', {"dateStyle": "short"})}` +
           (tag.rating
             ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(
                 tag.rating.toFixed()
               )}`
-            : "")
+            : "") + `\n> ${tag.comment}`
         : `Tag n°**${tag.id}**` +
           (tag.rating
             ? `, Note: **${tag.rating.toFixed(1)}** ${":star:".repeat(

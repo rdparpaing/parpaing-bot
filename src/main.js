@@ -2,6 +2,10 @@ require("dotenv").config();
 const { createClient } = require("@supabase/supabase-js");
 
 const { Client, MessageEmbed } = require("discord.js");
+// const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const { writeFile, readdirSync } = require("fs");
+
 const client = new Client({
   intents: [
     "GUILDS",
@@ -11,6 +15,11 @@ const client = new Client({
     "GUILD_VOICE_STATES",
   ],
 });
+
+let r_d = false
+
+// const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+
 const { Parser } = require("json2csv"),
   parser = new Parser({
     fields: [
@@ -24,7 +33,6 @@ const { Parser } = require("json2csv"),
       "alias",
     ],
   });
-const { writeFile } = require("fs");
 
 const options = {
   schema: "public",
@@ -39,6 +47,10 @@ const supabase = createClient(
   options
 );
 module.exports.supabase = supabase;
+
+if (process.argv.indexOf("dev") + 1) {
+  r_d = true
+}
 
 if (process.argv.indexOf("api") + 1) {
   const app = require("express")();
@@ -118,6 +130,31 @@ if (process.argv.indexOf("bot") + 1) {
   const social = require("./functions/social");
   const addMsg = require("./functions/addMsg");
 
+  // Initialize slash commands
+  /*
+  const clientId = process.env.CLIENT_ID;
+  const commands = [];
+  const commandFiles = fs.readdirSync('./commands/slash').filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    commands.push(command.data.toJSON());
+  }
+  (async () => {
+    try {
+      console.log('Started refreshing application (/) commands.');
+  
+      await rest.put(
+        Routes.applicationCommand(clientId),
+        { body: commands },
+      );
+  
+      console.log('Successfully reloaded application (/) commands.');
+    } catch (error) {
+      console.error(error);
+    }
+  })(); */
+
+  // Initialize social module
   var badCitizens = [];
   var words = require("an-array-of-french-words");
 
@@ -177,6 +214,7 @@ if (process.argv.indexOf("bot") + 1) {
 
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
+    if (!r_d || message.guild.id != "820704776425439244") return;
 
     if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
       social(supabase, message.author.id, -2);

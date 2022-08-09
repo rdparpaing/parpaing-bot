@@ -9,7 +9,7 @@ module.exports = async (message, supabase) => {
   if (res1.data.length > 0) {
     const res2 = await supabase
       .from("archive")
-      .select("id, tag, comment, attachment, rating")
+      .select("*")
       .in("tag", res1.data[0].tags);
     if (res2.data && res2.data.length > 0) {
       const tag = res2.data[Math.floor(Math.random() * res2.data.length)];
