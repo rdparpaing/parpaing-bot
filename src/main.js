@@ -214,7 +214,7 @@ if (process.argv.indexOf("bot") + 1) {
 
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
-    if (r_d || message.guild.id != "820704776425439244") return;
+    if (r_d && message.guild.id != "820704776425439244") return;
 
     if (/(^|[\s:])(pg)(pg+)?([\s:]|$)/g.test(message.content.toLowerCase())) {
       social(supabase, message.author.id, -2);
