@@ -349,7 +349,7 @@ if (process.argv.indexOf("bot") + 1) {
           member.setNickname(words[Math.floor(Math.random() * words.length)]);
         }
       }
-    } catch {}
+    } catch {return 0;}
   }
 
   async function increaseSc() {
